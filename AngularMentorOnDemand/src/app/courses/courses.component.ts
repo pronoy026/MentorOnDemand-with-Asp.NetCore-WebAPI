@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./courses.component.scss']
 })
 export class CoursesComponent implements OnInit {
-  courseList
+  
   mentorCourseList
 
   mentorName
@@ -22,36 +22,29 @@ export class CoursesComponent implements OnInit {
   ngOnInit() {
     // this.getCourses()
     this.getMentorCourses()
-    console.log(this.courseList)
-    console.log(this.mentorCourseList)
   }
- /* getCourses() {
-    this._dataService.getAllCourses()
-      .subscribe(
-        res => this.courseList = res,
-        err => console.log(err)
-      )
-  } */
 
   getMentorCourses() {
     this._dataService.getAllMentorCourses()
       .subscribe(
-        res => this.mentorCourseList = res,
+        res =>{ 
+          this.mentorCourseList = res
+          console.log(res)
+        },
         err => console.log(err)
       )
   }
 
   modalDataChange(data) {
 
-    this.mentorName =data.mentorName
+    this.mentorName =data.mentor.name
     this.mentorRating =data.rating
     this.mentorNoOfTrainings= data.nooftrainings
-    this.expYears =data.expYears
+    this.expYears =data.mentor.experience
 
   }
 
   makePayment(course) {
-    console.log(course)
     this._dataService.selectedCourseForPayment = course
     this._router.navigate(['/studentpayment'])
   }

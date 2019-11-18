@@ -11,6 +11,7 @@ namespace DotNetMentorOnDemandAPI.Data
     {
         IEnumerable<UserDto> GetActiveUsersByRole(string roleId);
         IEnumerable<UserDto> GetBlockedUsersByRole(string roleId);
+        IEnumerable<CourseDto> GetAllCourses();
 
         bool RegisterTechnology(Technology technology);
         bool BlockUnblockUser(string userId);

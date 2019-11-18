@@ -41,5 +41,23 @@ namespace DotNetMentorOnDemandAPI.Data
                 throw;
             }
         }
+
+        public bool MentorSkillExists(int techId, string mentorEmail)
+        {
+            try
+            {
+                var skill = context.MentorSkills.Where(s => s.TechId == techId && s.MentorEmail == mentorEmail).FirstOrDefault();
+                if(skill!=null)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

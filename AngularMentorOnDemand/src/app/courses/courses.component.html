@@ -10,10 +10,14 @@
                     {{course.description}}
                 </p>
                 <div>
-                    <h5 style="color: black; text-align: center"> Duration : {{course.duration}} weeks</h5>
+                    <h5 style="color: black; text-align: center"> Duration : {{course.duration}} days</h5>
+                </div>
+                <div style="color: darkblue; text-align: center" class="row">
+                    <div class="col-md-6">Start Date : {{course.startDate}}</div>
+                    <div class="col-md-6">End Date : {{course.endDate}}</div>
                 </div>
                 <div>
-                    <h5 style="color: #00887a; cursor: pointer;; text-align: center; font-family: fantasy"><a data-toggle="modal" data-target="#myModal" (click)="modalDataChange(course)"> Mentor : {{course.mentorName}} </a></h5>
+                    <h5 style="color: #00887a; cursor: pointer;; text-align: center; font-family: fantasy"><a data-toggle="modal" data-target="#myModal" (click)="modalDataChange(course)" title="Click to see mentor profile."> Mentor : {{course.mentor.name}} </a></h5>
                 </div>
                 <!-- modal -->
                 <div class="modal fade" id="myModal">

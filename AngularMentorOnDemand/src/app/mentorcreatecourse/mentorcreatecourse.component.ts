@@ -11,28 +11,29 @@ export class MentorcreatecourseComponent implements OnInit {
 
   constructor(private data: DatashareService, private router: Router) { }
 
-  sdate = ""
-  edate = ""
-  createCourseData = { MentorEmail: localStorage.getItem('email'), TechId: 0, StartDate: new Date, EndDate: new Date }
+  sdate= new Date()
+  edate = new Date()
+  createCourseData = { MentorEmail: localStorage.getItem('email'), TechId: 0, StartDate:'', EndDate:''}
   techData
   message = ""
-  edate2
+ 
 
   ngOnInit() {
-    console.log('jj')
-    console.log(this.data.techData)
+    // console.log(this.data.techData)
     this.techData = this.data.techData
   }
   dateChange() {
-    this.createCourseData.StartDate = new Date(this.sdate)
-    console.log(this.createCourseData.StartDate)
-    this.createCourseData.EndDate.setDate(this.createCourseData.StartDate.getDate() + (this.techData.duration));
-    console.log(this.createCourseData.EndDate)
-    this.edate2 = this.createCourseData.EndDate.toISOString().slice(0,10);
+    this.sdate = new Date(this.createCourseData.StartDate)
+    console.log(this.sdate)
+    this.edate.setDate(this.sdate.getDate() + (this.techData.duration));
+    // console.log(this.createCourseData.EndDate)
+    this.createCourseData.EndDate = this.edate.toISOString().slice(0,10);
     // this.edate2 = this.createCourseData.EndDate.toLocaleDateString();
-    console.log(this.edate2)
+    console.log(this.createCourseData.EndDate)
+    
   }
   createCourse() {
+    console.log(this.createCourseData)
     this.createCourseData.TechId = this.techData.id
     this.data.createMentorCourse(this.createCourseData)
       .subscribe(

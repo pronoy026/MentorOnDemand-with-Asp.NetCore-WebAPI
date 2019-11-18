@@ -14,8 +14,11 @@ namespace DotNetMentorOnDemandAPI.Models
         public string StudentEmail { get; set; }
         [Required]
         public int MentorSkillId { get; set; }
+        public int CompletionStatus { get; set; }
+        public int Rating { get; set; }
         public bool IsRequested { get; set; }
         public bool IsRegistered { get; set; }
+        public bool IsRejected { get; set; }
         public bool IsCompleted { get; set; }
     }
 }

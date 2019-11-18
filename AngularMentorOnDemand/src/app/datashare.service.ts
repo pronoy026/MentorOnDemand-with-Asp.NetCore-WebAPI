@@ -19,17 +19,18 @@ export class DatashareService {
   selectedCourseForPayment
   courseOverviewData
 
-  private allCoursesUrl = "http://localhost:3000/api/courseAll"
-  private allMentorCoursesUrl = "http://localhost:3000/api/allMentorCourses"
-  private _getAllStudentsUrl =this.apiServer + "/api/admin/getactiveusers/3"
+  
+  private allMentorCoursesUrl = this.apiServer + "/api/admin/getallcourses"
+  private _getAllStudentsUrl = this.apiServer + "/api/admin/getactiveusers/3"
   private _getAllCoursesUrl = "http://localhost:3000/api/allCourses"
   private _getAllMentorsUrl = this.apiServer + "/api/admin/getactiveusers/2"
 
   private _registerTechUrl = this.apiServer + "/api/admin/registertech"
   private _getAllTechsUrl = this.apiServer + "/api/mentor/gettechs"
   private _createCourseUrl = this.apiServer + "/api/mentor/creatementorskill"
+  private _MentorSkillExistsUrl = this.apiServer + "/api/mentor/mentorskillexists"
 
-  private _appliedCourseUrl = "http://localhost:3000/api/appliedcourse"
+  private _appliedCourseUrl = this.apiServer + "/api/student/applyforcourse"
   private _getStudentAllAppliedCoursesUrl = "http://localhost:3000/api/studentallappliedcourses"
   private _getMentorAllAppliedCoursesUrl = "http://localhost:3000/api/mentorallappliedcourses"
   private _deleteAppliedCourseUrl = "http://localhost:3000/api/deleteappliedcourse"
@@ -43,7 +44,7 @@ export class DatashareService {
   private _getStudentAllCompletedCoursesUrl = "http://localhost:3000/api/studentallcompletedcourses"
   private _getMentorAllCompletedCoursesUrl = "http://localhost:3000/api/mentorallcompletedcourses"
 
-  private _checkCourseUrl = "http://localhost:3000/api/checkcourse"
+  private _checkCourseUrl = this.apiServer + "/api/student/checkcourse"
   private _searchUrl ="http://localhost:3000/api/search"
 
   constructor( private http : HttpClient) { }
@@ -60,10 +61,9 @@ export class DatashareService {
     return this.http.post<any>(this._createCourseUrl, course)
   }
 
-  getAllCourses () {
-    return this.http.get<any>(this.allCoursesUrl)
-  }  //not needed
-
+  mentorSkillExists(data) {
+    return this.http.post<any>(this._MentorSkillExistsUrl, data)
+  }
 
   //for courses tab in general
   getAllMentorCourses () {

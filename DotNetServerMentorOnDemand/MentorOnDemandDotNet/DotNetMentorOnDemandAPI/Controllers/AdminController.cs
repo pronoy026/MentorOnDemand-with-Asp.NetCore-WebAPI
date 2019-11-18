@@ -13,7 +13,6 @@ namespace DotNetMentorOnDemandAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class AdminController : ControllerBase
     {
 
@@ -45,6 +44,17 @@ namespace DotNetMentorOnDemandAPI.Controllers
         {
             var users = repository.GetBlockedUsersByRole(id);
             return users;
+        }
+
+        [HttpGet("getallcourses")]
+        public IActionResult GetAllCourses(string id)
+        {
+            var courses = repository.GetAllCourses();
+            if (!courses.Any())
+            {
+                return BadRequest();
+            }
+            return Ok(courses);
         }
 
         // POST: api/Admin

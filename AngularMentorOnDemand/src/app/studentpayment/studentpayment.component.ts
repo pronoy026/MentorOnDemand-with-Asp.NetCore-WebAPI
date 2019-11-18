@@ -20,24 +20,21 @@ export class StudentpaymentComponent implements OnInit {
 
   ngOnInit() {
     this.courseData = this._datashare.selectedCourseForPayment
-    console.log(this._datashare.selectedCourseForPayment)
     this.paymentSuccess = false
-    this._auth.specialTokenRequest().
-      subscribe(
-        res => {
-          this._datashare.userEmail = res.userEmail
+    
+          this._datashare.userEmail = localStorage.getItem('email')
           this._datashare.userTypeStudent = true
           this._datashare.userTypeMentor = false
           this._datashare.userTypeAdmin = false
-          this._datashare.userName = res.name
-          if (res.accType !== "student") {
+          if (localStorage.getItem('role')!='3') {
             this.notStudent = true
-            // this._router.navigate(['/signin'])
           } else {
             this.notStudent = false
             if (this.courseData !== undefined) {
-              this.courseData.studentEmail = res.userEmail
-              this._datashare.checkCourse(this.courseData)
+              console.log(this.courseData)
+              let StudentEmail = localStorage.getItem('email')
+              let MentorSkillId = this.courseData.mentorSkillId
+              this._datashare.checkCourse({StudentEmail, MentorSkillId})
                 .subscribe(
                   res => {
                     this.eligibleStudent = res
@@ -47,42 +44,29 @@ export class StudentpaymentComponent implements OnInit {
                 )
             }
           }
-        },
-        err => {
-          if (err instanceof HttpErrorResponse) {
-            if (err.status === 401) {
-              console.log("Yep works")
-              this._router.navigate(['/signin'])
-            }
-          }
-        }
-
-      )
 
   }
 
   appliedCourse(course) {
     console.log('data came')
     console.log(course)
-    this.paymentSuccess = true
     let record = {
-      name: course.name,
-      description: course.description,
-      fee: course.fee,
-      mentorEmail: course.mentorEmail,
-      mentorName: course.mentorName,
-      duration: course.duration,
-      imageUrl: course.imageUrl,
-      nooftrainings: course.nooftrainings,
-      commision: course.commision,
-      rating: course.rating,
-      expYears: course.expYears,
-      studentEmail: this._datashare.userEmail,
-      studentName: this._datashare.userName
+      StudentEmail : localStorage.getItem('email'),
+      MentorSkillId : course.mentorSkillId,
+      IsRequested : true,
+      IsCompleted: false,
+      IsRejected: false,
+      IsRegistered: false,
+      CompletionStatus: 0,
+      Rating : 0
     }
+    console.log(record)
     this._datashare.appliedCourse(record)
       .subscribe(
-        res => console.log('course applied successfully'),
+        res => { 
+          this.paymentSuccess = true
+          console.log('course applied successfully')
+        },
         err => console.log(err)
       )
   }

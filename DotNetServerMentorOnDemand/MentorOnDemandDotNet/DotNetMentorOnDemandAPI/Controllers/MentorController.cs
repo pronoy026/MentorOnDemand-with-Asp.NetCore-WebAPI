@@ -32,6 +32,17 @@ namespace DotNetMentorOnDemandAPI.Controllers
             }
             return Ok(techs);
         }
+        //for checkin' if mentor skill already exists
+        [HttpPost("mentorskillexists")]
+        public IActionResult MentorSkillExists([FromBody] MentorSkill mentorSkill)
+        {
+            var result = repository.MentorSkillExists(mentorSkill.TechId, mentorSkill.MentorEmail);
+            if (result)
+            {
+                return BadRequest("The Course is already created by you!");
+            }
+            return Ok();
+        }
 
         // GET: api/Mentor/5
         [HttpGet("{id}", Name = "Get")]
@@ -51,6 +62,7 @@ namespace DotNetMentorOnDemandAPI.Controllers
             }
             return BadRequest();
         }
+
 
         // PUT: api/Mentor/5
         [HttpPut("{id}")]

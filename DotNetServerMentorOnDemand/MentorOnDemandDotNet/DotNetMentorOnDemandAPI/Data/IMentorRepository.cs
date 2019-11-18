@@ -10,6 +10,7 @@ namespace DotNetMentorOnDemandAPI.Data
     {
         public IEnumerable<Technology> GetTechnologies();
 
+        bool MentorSkillExists(int techId, string mentorEmail);
         bool CreateSkill(MentorSkill mentorSkill);
     }
 }

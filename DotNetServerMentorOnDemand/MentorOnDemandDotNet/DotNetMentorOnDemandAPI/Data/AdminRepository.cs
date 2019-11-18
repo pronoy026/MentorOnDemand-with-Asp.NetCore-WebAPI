@@ -48,6 +48,37 @@ namespace DotNetMentorOnDemandAPI.Data
             return users.ToList();
         }
 
+        public IEnumerable<CourseDto> GetAllCourses()
+        {
+            var courses = (from s in context.MentorSkills
+                           join t in context.Technologies on s.TechId equals t.Id
+                           select new CourseDto
+                           {
+                               Name= t.Name,
+                               Description= t.Description,
+                               Fee = t.Fee,
+                               ImageUrl = t.ImageUrl,
+                               Duration = t.Duration,
+                               MentorSkillId = s.Id,
+                               Mentor= (
+                                       from u in context.CustomUsers
+                                       where (s.MentorEmail == u.Email)
+                                       select new UserDto
+                                       {
+                                           Id = u.Id,
+                                           Email = u.Email,
+                                           Name = u.Name,
+                                           Role = "Mentor",
+                                           IsBlocked = u.IsBlocked,
+                                           PhoneNumber = u.PhoneNumber
+                                       }).FirstOrDefault(),
+                               StartDate = s.StartDate.ToLongDateString(),
+                               EndDate = s.EndDate.ToLongDateString()
+                           }
+                );
+            return courses;
+        }
+
         public IEnumerable<UserDto> GetBlockedUsersByRole(string roleId)
         {
             var users = (from u in context.CustomUsers
