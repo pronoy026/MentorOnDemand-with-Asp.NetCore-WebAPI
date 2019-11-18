@@ -41,6 +41,8 @@ import { MentorcompletedcoursesComponent } from './mentorcompletedcourses/mentor
 import { CourseOverviewComponent } from './course-overview/course-overview.component';
 import { AddtechnologyComponent } from './addtechnology/addtechnology.component';
 import { MentortechnologiesComponent } from './mentortechnologies/mentortechnologies.component';
+import { MentorcreatedcoursesComponent } from './mentorcreatedcourses/mentorcreatedcourses.component';
+import { MentorcreatecourseComponent } from './mentorcreatecourse/mentorcreatecourse.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +78,8 @@ import { MentortechnologiesComponent } from './mentortechnologies/mentortechnolo
     CourseOverviewComponent,
     AddtechnologyComponent,
     MentortechnologiesComponent,
+    MentorcreatedcoursesComponent,
+    MentorcreatecourseComponent,
   ],
   imports: [
     BrowserModule,

@@ -11,31 +11,17 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class AdminhomeComponent implements OnInit {
 
-  constructor( private _auth : AuthService, private _router : Router, public _datashare : DatashareService) { }
+  constructor(private _auth: AuthService, private _router: Router, public _datashare: DatashareService) { }
 
   ngOnInit() {
 
-    this._auth.specialTokenRequest().
-    subscribe(
-      res =>{ this._datashare.userEmail = res.userEmail
-        this._datashare.userTypeStudent = false
-        this._datashare.userTypeMentor = false
-        this._datashare.userTypeAdmin = true
-        this._datashare.userName = res.name.split(' ')[0]
-        if (res.accType!=="admin") {
-          this._router.navigate(['/signin'])
-        }
-      },
-      err => {
-        if(err instanceof HttpErrorResponse) {
-          if (err.status === 401) {
-            console.log("Yep works")
-            this._router.navigate(['/signin'])
-          }
-        }
-      }
-
-    )
+    this._datashare.userEmail = localStorage.getItem('email')
+    this._datashare.userTypeStudent = false
+    this._datashare.userTypeMentor = false
+    this._datashare.userTypeAdmin = true
+    if (localStorage.getItem('role') != '1') {
+      this._router.navigate(['/signin'])
+    }
 
   }
 

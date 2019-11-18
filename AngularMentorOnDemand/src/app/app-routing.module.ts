@@ -30,6 +30,8 @@ import { StudentcompletedcoursesComponent } from './studentcompletedcourses/stud
 import { CourseOverviewComponent } from './course-overview/course-overview.component';
 import { AddtechnologyComponent } from './addtechnology/addtechnology.component';
 import { MentortechnologiesComponent } from './mentortechnologies/mentortechnologies.component';
+import { MentorcreatecourseComponent } from './mentorcreatecourse/mentorcreatecourse.component';
+import { MentorcreatedcoursesComponent } from './mentorcreatedcourses/mentorcreatedcourses.component';
 
 
 const routes: Routes = [
@@ -72,7 +74,9 @@ const routes: Routes = [
       {
         path : 'mentorcompletedcourses', component : MentorcompletedcoursesComponent
       },
-      {path: 'mentortechnologies', component : MentortechnologiesComponent}
+      {path: 'mentortechnologies', component : MentortechnologiesComponent},
+      { path: 'mentorcreatecourse', component: MentorcreatecourseComponent},
+      { path: 'mentorcreatedcourses', component: MentorcreatedcoursesComponent}
     ],
     canActivate: [AuthGuard]
   },
