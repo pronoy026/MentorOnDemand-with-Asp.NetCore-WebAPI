@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DatashareService } from '../datashare.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-mentortechnologies',
@@ -8,10 +9,8 @@ import { DatashareService } from '../datashare.service';
 })
 export class MentortechnologiesComponent implements OnInit {
 
-  constructor(private data : DatashareService) { }
+  constructor(public data : DatashareService, private router: Router) { }
   techs
-
-  appliedCourses
   tabletoggler: boolean
 
   ngOnInit() {
@@ -30,4 +29,8 @@ export class MentortechnologiesComponent implements OnInit {
         )
   }
 
+  createCourse(techData) {
+    this.data.techData = techData
+    this.router.navigate(['/mentorhome/mentorcreatecourse'])
+  }
 }

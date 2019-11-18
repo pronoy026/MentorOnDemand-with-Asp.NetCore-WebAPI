@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using DotNetMentorOnDemandAPI.Data;
 using DotNetMentorOnDemandAPI.DTOs;
 using DotNetMentorOnDemandAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,6 +13,7 @@ namespace DotNetMentorOnDemandAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class AdminController : ControllerBase
     {
 
@@ -47,9 +49,14 @@ namespace DotNetMentorOnDemandAPI.Controllers
 
         // POST: api/Admin
         [HttpPost("registertech")]
-        public bool Post([FromBody] Technology technology)
+        public IActionResult Post([FromBody] Technology technology)
         {
-            return repository.RegisterTechnology(technology);
+            var result = repository.RegisterTechnology(technology);
+            if(result)
+            {
+                return Ok();
+            }
+            return BadRequest();
         }
 
         // PUT: api/Admin/5

@@ -19,10 +19,10 @@
                     <td>{{tech.fee}} /-</td>
                     <td>{{tech.commission}} %</td>
                     <td>{{tech.duration}} Days</td>
-                    <td><button class="btn btn-primary" (click)="addTechToProfile()">Create a course</button></td>
+                    <td><button class="btn btn-primary" (click)="createCourse(tech)">Create a course</button></td>
                 </tr>
             </tbody>
         </table>
-        <div *ngIf="!tabletoggler" style="text-align: center; color:#0066ff;padding-top:100px ;"> There are no applied courses!</div>
+        <div *ngIf="!tabletoggler" style="text-align: center; color:#0066ff;padding-top:100px ;"> There are no available technology!</div>
     </div>
 </div>

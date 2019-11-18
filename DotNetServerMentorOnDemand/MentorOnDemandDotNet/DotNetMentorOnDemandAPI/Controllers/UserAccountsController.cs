@@ -127,13 +127,16 @@ namespace DotNetMentorOnDemandAPI.Controllers
             return BadRequest(result.Errors);
         }
 
-        private async Task<string> GenerateJwtToken(string email, IdentityUser user)
+        private async Task<string> GenerateJwtToken(string email, UserModel user)
         {
+            var roles = await userManager.GetRolesAsync(user);
+            var role = roleManager.Roles.SingleOrDefault(r => r.Name == roles.SingleOrDefault());
             var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Sub, email),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(ClaimTypes.NameIdentifier, user.Id)
+                new Claim(ClaimTypes.NameIdentifier, user.Id),
+                new Claim(ClaimTypes.Role, role.Name)
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtKey"]));

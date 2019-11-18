@@ -15,6 +15,7 @@ export class DatashareService {
   userTypeAdmin : boolean
   accType : string
   userName : string
+  techData : any
   selectedCourseForPayment
   courseOverviewData
 
@@ -26,6 +27,7 @@ export class DatashareService {
 
   private _registerTechUrl = this.apiServer + "/api/admin/registertech"
   private _getAllTechsUrl = this.apiServer + "/api/mentor/gettechs"
+  private _createCourseUrl = this.apiServer + "/api/mentor/creatementorskill"
 
   private _appliedCourseUrl = "http://localhost:3000/api/appliedcourse"
   private _getStudentAllAppliedCoursesUrl = "http://localhost:3000/api/studentallappliedcourses"
@@ -52,6 +54,10 @@ export class DatashareService {
 
   getMentorTechs() {
     return this.http.get<any>(this._getAllTechsUrl)
+  }
+
+  createMentorCourse(course) {
+    return this.http.post<any>(this._createCourseUrl, course)
   }
 
   getAllCourses () {

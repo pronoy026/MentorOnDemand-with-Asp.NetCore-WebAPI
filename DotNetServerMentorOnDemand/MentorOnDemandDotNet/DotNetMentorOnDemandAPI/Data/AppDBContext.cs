@@ -45,5 +45,7 @@ namespace DotNetMentorOnDemandAPI.Data
 
         public DbSet<UserModel> CustomUsers { get; set; }
         public DbSet<Technology> Technologies { get; set; }
+        public DbSet<MentorSkill> MentorSkills { get; set; }
+        public DbSet<Course> Courses { get; set; }
     }
 }

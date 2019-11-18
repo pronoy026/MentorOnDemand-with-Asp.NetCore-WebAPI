@@ -13,6 +13,22 @@ namespace DotNetMentorOnDemandAPI.Data
         {
             this.context = context;
         }
+
+        public bool CreateSkill(MentorSkill mentorSkill)
+        {
+            try
+            {
+                context.MentorSkills.Add(mentorSkill);
+                context.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public IEnumerable<Technology> GetTechnologies()
         {
             try

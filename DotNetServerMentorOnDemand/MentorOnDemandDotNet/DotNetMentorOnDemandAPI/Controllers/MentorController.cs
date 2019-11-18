@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DotNetMentorOnDemandAPI.Data;
 using DotNetMentorOnDemandAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,6 +12,7 @@ namespace DotNetMentorOnDemandAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class MentorController : ControllerBase
     {
         IMentorRepository repository;
@@ -39,9 +41,15 @@ namespace DotNetMentorOnDemandAPI.Controllers
         }
 
         // POST: api/Mentor
-        [HttpPost]
-        public void Post([FromBody] string value)
+        [HttpPost("creatementorskill")]
+        public IActionResult Post([FromBody] MentorSkill mentorSkill)
         {
+            var result = repository.CreateSkill(mentorSkill);
+            if(result)
+            {
+                return Ok();
+            }
+            return BadRequest();
         }
 
         // PUT: api/Mentor/5

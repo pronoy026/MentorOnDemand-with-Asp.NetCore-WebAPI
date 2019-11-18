@@ -11,8 +11,12 @@ namespace DotNetMentorOnDemandAPI.Models
         [Key]
         public int Id { get; set; }
         [Required]
-        public string mentorEmail { get; set; }
-        public DateTime Start { get; set; }
-        public int MyProperty { get; set; }
+        public string MentorEmail { get; set; }
+        [Required]
+        public int TechId { get; set; }
+        [Required]
+        public DateTime StartDate { get; set; }
+        [Required]
+        public DateTime EndDate { get; set; }
     }
 }

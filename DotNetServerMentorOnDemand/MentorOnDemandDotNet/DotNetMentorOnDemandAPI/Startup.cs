@@ -85,9 +85,11 @@ namespace DotNetMentorOnDemandAPI
 
             app.UseHttpsRedirection();
 
+            app.UseCors(policy => policy.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin());
+
             app.UseRouting();
 
-            app.UseCors(policy => policy.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin());
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

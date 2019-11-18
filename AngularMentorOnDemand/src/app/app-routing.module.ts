@@ -74,7 +74,7 @@ const routes: Routes = [
       {
         path : 'mentorcompletedcourses', component : MentorcompletedcoursesComponent
       },
-      {path: 'mentortechnologies', component : MentortechnologiesComponent},
+      { path: 'mentortechnologies', component : MentortechnologiesComponent},
       { path: 'mentorcreatecourse', component: MentorcreatecourseComponent},
       { path: 'mentorcreatedcourses', component: MentorcreatedcoursesComponent}
     ],

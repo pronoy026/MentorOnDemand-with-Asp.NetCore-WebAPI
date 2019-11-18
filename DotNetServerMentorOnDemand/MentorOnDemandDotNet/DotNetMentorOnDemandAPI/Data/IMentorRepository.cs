@@ -9,5 +9,7 @@ namespace DotNetMentorOnDemandAPI.Data
     public interface IMentorRepository
     {
         public IEnumerable<Technology> GetTechnologies();
+
+        bool CreateSkill(MentorSkill mentorSkill);
     }
 }
