@@ -32,6 +32,7 @@ import { AddtechnologyComponent } from './addtechnology/addtechnology.component'
 import { MentortechnologiesComponent } from './mentortechnologies/mentortechnologies.component';
 import { MentorcreatecourseComponent } from './mentorcreatecourse/mentorcreatecourse.component';
 import { MentorcreatedcoursesComponent } from './mentorcreatedcourses/mentorcreatedcourses.component';
+import { MentorrejectedcoursesComponent } from './mentorrejectedcourses/mentorrejectedcourses.component';
 
 
 const routes: Routes = [
@@ -73,6 +74,9 @@ const routes: Routes = [
       },
       {
         path : 'mentorcompletedcourses', component : MentorcompletedcoursesComponent
+      },
+      {
+        path : 'mentorrejectedcourses', component : MentorrejectedcoursesComponent
       },
       { path: 'mentortechnologies', component : MentortechnologiesComponent},
       { path: 'mentorcreatecourse', component: MentorcreatecourseComponent},

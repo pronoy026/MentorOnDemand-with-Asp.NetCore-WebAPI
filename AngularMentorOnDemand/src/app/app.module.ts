@@ -43,6 +43,7 @@ import { AddtechnologyComponent } from './addtechnology/addtechnology.component'
 import { MentortechnologiesComponent } from './mentortechnologies/mentortechnologies.component';
 import { MentorcreatedcoursesComponent } from './mentorcreatedcourses/mentorcreatedcourses.component';
 import { MentorcreatecourseComponent } from './mentorcreatecourse/mentorcreatecourse.component';
+import { MentorrejectedcoursesComponent } from './mentorrejectedcourses/mentorrejectedcourses.component';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import { MentorcreatecourseComponent } from './mentorcreatecourse/mentorcreateco
     MentortechnologiesComponent,
     MentorcreatedcoursesComponent,
     MentorcreatecourseComponent,
+    MentorrejectedcoursesComponent,
   ],
   imports: [
     BrowserModule,

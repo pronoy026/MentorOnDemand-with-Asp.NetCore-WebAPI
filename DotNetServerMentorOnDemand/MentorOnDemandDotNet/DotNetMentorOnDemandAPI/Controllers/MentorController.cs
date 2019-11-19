@@ -44,13 +44,6 @@ namespace DotNetMentorOnDemandAPI.Controllers
             return Ok();
         }
 
-        // GET: api/Mentor/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
         // POST: api/Mentor
         [HttpPost("creatementorskill")]
         public IActionResult Post([FromBody] MentorSkill mentorSkill)
@@ -62,6 +55,58 @@ namespace DotNetMentorOnDemandAPI.Controllers
             }
             return BadRequest();
         }
+
+        [HttpGet("getappliedcourses/{email}")]
+        public IActionResult GetAppliedCourses(string email)
+        {
+            var courses = repository.GetAppliedCourses(email);
+            return Ok(courses);
+        }
+
+        [HttpGet("getregisteredcourses/{email}")]
+        public IActionResult GetRegisteredCourses(string email)
+        {
+            var courses = repository.GetRegisteredCourses(email);
+            return Ok(courses);
+        }
+
+        [HttpGet("getcompletedcourses/{email}")]
+        public IActionResult GetCompletedCourses(string email)
+        {
+            var courses = repository.GetCompletedCourses(email);
+            return Ok(courses);
+        }
+
+        [HttpGet("getrejectedcourses/{email}")]
+        public IActionResult GetRejectedCourses(string email)
+        {
+            var courses = repository.GetRejectedCourses(email);
+            return Ok(courses);
+        }
+
+
+        [HttpPost("acceptcourse")]
+        public IActionResult AcceptCourse([FromBody] Course course)
+        {
+            var result = repository.AcceptCourse(course);
+            if (result)
+            {
+                return Ok();
+            }
+            return BadRequest();
+        }
+
+        [HttpPost("rejectcourse")]
+        public IActionResult RejectCourse([FromBody] Course course)
+        {
+            var result = repository.RejectCourse(course);
+            if (result)
+            {
+                return Ok();
+            }
+            return BadRequest();
+        }
+
 
 
         // PUT: api/Mentor/5

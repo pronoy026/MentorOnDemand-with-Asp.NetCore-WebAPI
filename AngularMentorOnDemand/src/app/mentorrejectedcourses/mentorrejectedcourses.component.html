@@ -1,6 +1,6 @@
 <div class="container">
     <div style="padding-top: 20px">
-        <h4 style="color: #00887a;text-align: center; font-family: fantasy">All Accepted (Registered) Courses</h4>
+        <h4 style="color: #00887a;text-align: center; font-family: fantasy">All Rejected Courses</h4>
         <table *ngIf="tabletoggler" class="table">
             <thead class="thead-dark">
                 <tr>
@@ -10,7 +10,7 @@
                     <th>Completion Status</th>
                 </tr>
             </thead>
-            <tbody *ngFor="let course of registeredCourses; let i = index" class="shadow">
+            <tbody *ngFor="let course of rejectedCourses; let i = index" class="shadow">
                 <tr>
                     <td>{{i+1}}</td>
                     <td>{{course.name}}</td>
@@ -19,6 +19,6 @@
                 </tr>
             </tbody>
         </table>
-        <div *ngIf="!tabletoggler" style="text-align: center; color:#0066ff;padding-top:100px ;"> There are no accepted registered courses!</div>
+        <div *ngIf="!tabletoggler" style="text-align: center; color:#0066ff;padding-top:100px ;"> There are no rejected courses!</div>
     </div>
 </div>

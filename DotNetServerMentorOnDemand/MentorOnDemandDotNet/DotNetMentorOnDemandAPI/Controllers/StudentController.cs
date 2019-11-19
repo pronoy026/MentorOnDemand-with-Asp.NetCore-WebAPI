@@ -38,6 +38,17 @@ namespace DotNetMentorOnDemandAPI.Controllers
             return BadRequest();
         }
 
+        [HttpPost("getappliedcourses")]
+        public IActionResult GetAppliedCourses([FromBody] Course course)
+        {
+            var courses = repository.GetAppliedCourses(course);
+            if (!courses.Any())
+            {
+                return NoContent();
+            }
+            return Ok(courses);
+        }
+
         // POST: api/Student
         [HttpPost]
         public void Post([FromBody] string value)

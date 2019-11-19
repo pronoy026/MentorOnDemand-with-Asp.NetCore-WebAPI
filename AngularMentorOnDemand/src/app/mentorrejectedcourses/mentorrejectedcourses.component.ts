@@ -3,24 +3,24 @@ import { DatashareService } from '../datashare.service';
 import { AuthService } from '../auth.service';
 
 @Component({
-  selector: 'app-mentorregisteredcourses',
-  templateUrl: './mentorregisteredcourses.component.html',
-  styleUrls: ['./mentorregisteredcourses.component.scss']
+  selector: 'app-mentorrejectedcourses',
+  templateUrl: './mentorrejectedcourses.component.html',
+  styleUrls: ['./mentorrejectedcourses.component.scss']
 })
-export class MentorregisteredcoursesComponent implements OnInit {
+export class MentorrejectedcoursesComponent implements OnInit {
 
-  registeredCourses
+  rejectedCourses
   tabletoggler: boolean
 
   constructor(private _datashare: DatashareService, private _auth: AuthService) { }
 
   ngOnInit() {
     let mentorEmail = localStorage.getItem("email")
-    this._datashare.getMentorAllRegisteredCourses(mentorEmail)
+    this._datashare.getMentorAllRejectedCourses(mentorEmail)
       .subscribe(
         res => {
-          this.registeredCourses = res
-          if (this.registeredCourses.length == 0) {
+          this.rejectedCourses = res
+          if (this.rejectedCourses.length == 0) {
             this.tabletoggler = false
           } else {
             this.tabletoggler = true

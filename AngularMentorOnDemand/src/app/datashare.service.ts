@@ -31,18 +31,22 @@ export class DatashareService {
   private _MentorSkillExistsUrl = this.apiServer + "/api/mentor/mentorskillexists"
 
   private _appliedCourseUrl = this.apiServer + "/api/student/applyforcourse"
-  private _getStudentAllAppliedCoursesUrl = "http://localhost:3000/api/studentallappliedcourses"
-  private _getMentorAllAppliedCoursesUrl = "http://localhost:3000/api/mentorallappliedcourses"
-  private _deleteAppliedCourseUrl = "http://localhost:3000/api/deleteappliedcourse"
+  private _getStudentAllAppliedCoursesUrl = this.apiServer + "/api/student/getappliedcourses"
+
+  private _getMentorAllAppliedCoursesUrl = this.apiServer + "/api/mentor/getappliedcourses/"
+  private _getMentorAllRegisteredCoursesUrl = this.apiServer + "/api/mentor/getregisteredcourses/"
+  private _getMentorAllCompletedCoursesUrl = this.apiServer + "/api/mentor/getcompletedcourses/"
+  private _getMentorAllRejectedCoursesUrl = this.apiServer + "/api/mentor/getrejectedcourses/"
+  private _mentorAcceptCourseUrl = this.apiServer + "/api/mentor/acceptcourse"
+  private _mentorRejectCourseUrl = this.apiServer + "/api/mentor/rejectcourse"
+
 
   private _registeredCourseUrl = "http://localhost:3000/api/registeredcourse"
   private _getStudentAllRegisteredCoursesUrl = "http://localhost:3000/api/studentallregisteredcourses"
-  private _getMentorAllRegisteredCoursesUrl = "http://localhost:3000/api/mentorallregisteredcourses"
   private _updateRegisteredCourseUrl = "http://localhost:3000/api/updateregisteredcourse"
 
   private _completedCourseUrl = "http://localhost:3000/api/completedCourse"
   private _getStudentAllCompletedCoursesUrl = "http://localhost:3000/api/studentallcompletedcourses"
-  private _getMentorAllCompletedCoursesUrl = "http://localhost:3000/api/mentorallcompletedcourses"
 
   private _checkCourseUrl = this.apiServer + "/api/student/checkcourse"
   private _searchUrl ="http://localhost:3000/api/search"
@@ -93,11 +97,9 @@ export class DatashareService {
   }
 
   getMentorAllAppliedCourses(data) {
-    return this.http.post<any>(this._getMentorAllAppliedCoursesUrl, data)
+    return this.http.get<any>(this._getMentorAllAppliedCoursesUrl+data)
   }
-  deleteAppliedCourse(data) {
-    return this.http.post<any>(this._deleteAppliedCourseUrl, data)
-  }
+  
 
   //registered course
   registeredCourse(course) {
@@ -109,7 +111,7 @@ export class DatashareService {
   }
 
   getMentorAllRegisteredCourses(data) {
-    return this.http.post<any>(this._getMentorAllRegisteredCoursesUrl, data)
+    return this.http.get<any>(this._getMentorAllRegisteredCoursesUrl+data)
   }
 
   updateRegisteredCourses(data) {
@@ -126,7 +128,20 @@ export class DatashareService {
   }
 
   getMentorAllCompletedCourses(data) {
-    return this.http.post<any>(this._getMentorAllCompletedCoursesUrl, data)
+    return this.http.get<any>(this._getMentorAllCompletedCoursesUrl+data)
+  }
+
+  //mentor
+  mentorAcceptCourse(course) {
+    return this.http.post<any>(this._mentorAcceptCourseUrl, course)
+  }
+
+  mentorRejectCourse(course) {
+    return this.http.post<any>(this._mentorRejectCourseUrl, course)
+  }
+
+  getMentorAllRejectedCourses(data) {
+    return this.http.get<any>(this._getMentorAllRejectedCoursesUrl+data)
   }
 
   checkCourse(data) {

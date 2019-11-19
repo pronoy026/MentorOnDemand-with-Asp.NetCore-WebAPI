@@ -23,9 +23,9 @@ export class StudentpaymentComponent implements OnInit {
     this.paymentSuccess = false
     
           this._datashare.userEmail = localStorage.getItem('email')
-          this._datashare.userTypeStudent = true
-          this._datashare.userTypeMentor = false
-          this._datashare.userTypeAdmin = false
+          // this._datashare.userTypeStudent = true
+          // this._datashare.userTypeMentor = false
+          // this._datashare.userTypeAdmin = false
           if (localStorage.getItem('role')!='3') {
             this.notStudent = true
           } else {

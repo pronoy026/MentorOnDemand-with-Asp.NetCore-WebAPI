@@ -15,87 +15,50 @@ export class MentorrequestedcoursesComponent implements OnInit {
   constructor(private _datashare: DatashareService, private _auth: AuthService) { }
 
   ngOnInit() {
-    this._auth.specialTokenRequest()
+    this.renderList()
+  }
+
+  renderList() {
+    let MentorEmail = localStorage.getItem('email')
+    this._datashare.getMentorAllAppliedCourses(MentorEmail)
       .subscribe(
         res => {
-          let mentorEmail = res.userEmail
-          this._datashare.getMentorAllAppliedCourses({ mentorEmail })
-            .subscribe(
-              res => {
-                this.requestedCourses = res
-                if (this.requestedCourses.length == 0) {
-                  this.tabletoggler = false
-                } else {
-                  this.tabletoggler = true
-                }
-              },
-              err => console.log(err)
-            )
-
+          console.log(res)
+          this.requestedCourses = res
+          if (this.requestedCourses.length == 0) {
+            this.tabletoggler = false
+          } else {
+            this.tabletoggler = true
+          }
         },
         err => console.log(err)
       )
   }
 
   acceptStudent(course) {
-    course.completion = 0
-    this._datashare.registeredCourse(course)
+    let courseData = {
+      StudentEmail : course.student.email,
+      MentorSkillId : course.mentorSkillId
+    }
+    console.log(courseData)
+    this._datashare.mentorAcceptCourse(courseData)
       .subscribe(
-        res => {
-          console.log('course accepted successfully')
-          //update view
-          this._auth.specialTokenRequest()
-            .subscribe(
-              res => {
-                let mentorEmail = res.userEmail
-                this._datashare.getMentorAllAppliedCourses({ mentorEmail })
-                  .subscribe(
-                    res => {
-                      this.requestedCourses = res
-                      if (this.requestedCourses.length == 0) {
-                        this.tabletoggler = false
-                      } else {
-                        this.tabletoggler = true
-                      }
-                    },
-                    err => console.log(err)
-                  )
-
-              },
-              err => console.log(err)
-            )
+        res=>{
+          this.renderList()
         },
         err => console.log(err)
       )
   }
 
   rejectStudent(course) {
-    this._datashare.deleteAppliedCourse(course)
+    let courseData = {
+      StudentEmail : course.student.email,
+      MentorSkillId : course.mentorSkillId
+    }
+    this._datashare.mentorRejectCourse(courseData)
       .subscribe(
-        res => {
-          console.log('Applied Course deleted Successfully')
-          //update view
-          this._auth.specialTokenRequest()
-            .subscribe(
-              res => {
-                let mentorEmail = res.userEmail
-                this._datashare.getMentorAllAppliedCourses({ mentorEmail })
-                  .subscribe(
-                    res => {
-                      this.requestedCourses = res
-                      if (this.requestedCourses.length == 0) {
-                        this.tabletoggler = false
-                      } else {
-                        this.tabletoggler = true
-                      }
-                    },
-                    err => console.log(err)
-                  )
-
-              },
-              err => console.log(err)
-            )
-          //update view
+        res=>{
+          this.renderList()
         },
         err => console.log(err)
       )

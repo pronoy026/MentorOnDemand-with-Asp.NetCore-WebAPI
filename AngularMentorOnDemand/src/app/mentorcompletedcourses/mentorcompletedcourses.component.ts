@@ -15,23 +15,16 @@ export class MentorcompletedcoursesComponent implements OnInit {
   constructor(private _datashare: DatashareService, private _auth: AuthService) { }
 
   ngOnInit() {
-    this._auth.specialTokenRequest()
+    let mentorEmail = localStorage.getItem("email")
+    this._datashare.getMentorAllCompletedCourses(mentorEmail)
       .subscribe(
         res => {
-          let mentorEmail = res.userEmail
-          this._datashare.getMentorAllCompletedCourses({ mentorEmail })
-            .subscribe(
-              res => {
-                this.completedCourses = res
-                if (this.completedCourses.length == 0) {
-                  this.tabletoggler = false
-                } else {
-                  this.tabletoggler = true
-                }
-              },
-              err => console.log(err)
-            )
-
+          this.completedCourses = res
+          if (this.completedCourses.length == 0) {
+            this.tabletoggler = false
+          } else {
+            this.tabletoggler = true
+          }
         },
         err => console.log(err)
       )

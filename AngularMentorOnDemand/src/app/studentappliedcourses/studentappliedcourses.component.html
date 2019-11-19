@@ -4,18 +4,26 @@
         <table *ngIf="tabletoggler" class="table">
             <thead class="thead-dark">
                 <tr>
-                    <th>No</th>
+                    <th></th>
                     <th>Course Name</th>
                     <th>Mentor</th>
-                    <th>Action</th>
+                    <th>Duration</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
                 </tr>
             </thead>
             <tbody *ngFor="let course of appliedCourses; let i = index" class="shadow">
                 <tr>
-                    <td>{{i+1}}</td>
+                    <td>
+                        <div class="card-img d-flex justify-content-center">
+                            <img class="rounded-circle" src="{{course.imageUrl}}" alt="{{course.imageUrl}}" style="height: 70px; width :80px">
+                        </div>
+                    </td>
                     <td>{{course.name}}</td>
-                    <td>{{course.mentorName}}</td>
-                    <td>Pending</td>
+                    <td>{{course.mentor.name}}</td>
+                    <td>{{course.duration}} Days</td>
+                    <td>{{course.startDate}}</td>
+                    <td>{{course.endDate}}</td>
                 </tr>
             </tbody>
         </table>
