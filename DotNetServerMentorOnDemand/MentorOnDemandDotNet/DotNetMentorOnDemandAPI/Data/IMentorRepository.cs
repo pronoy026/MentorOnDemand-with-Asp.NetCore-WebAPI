@@ -20,7 +20,10 @@ namespace DotNetMentorOnDemandAPI.Data
 
         public bool AcceptCourse(Course course);
         public bool RejectCourse(Course course);
-        bool MentorSkillExists(int techId, string mentorEmail);
-        bool CreateSkill(MentorSkill mentorSkill);
+        public bool MentorSkillExists(int techId, string mentorEmail);
+        public bool CreateSkill(MentorSkill mentorSkill);
+        public bool DeleteNotifications(string email);
+        public bool DeleteNotificationById(int id);
+
     }
 }

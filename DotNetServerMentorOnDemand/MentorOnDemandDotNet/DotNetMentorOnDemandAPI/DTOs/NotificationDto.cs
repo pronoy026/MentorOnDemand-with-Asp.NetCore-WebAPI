@@ -7,6 +7,7 @@ namespace DotNetMentorOnDemandAPI.DTOs
 {
     public class NotificationDto
     {
+        public int NotiId { get; set; }
         public int Fee { get; set; }
         public string CourseName { get; set; }
         public UserDto Mentor { get; set; }

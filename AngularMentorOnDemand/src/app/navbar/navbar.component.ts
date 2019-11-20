@@ -11,7 +11,8 @@ import { DatashareService } from '../datashare.service';
 })
 export class NavbarComponent implements OnInit {
   userEmail
-  noti=12
+
+  mentorNotifications
 
   constructor(public _datashare: DatashareService, private _authService: AuthService) { }
 
@@ -26,6 +27,8 @@ export class NavbarComponent implements OnInit {
         this._datashare.userTypeStudent = false
         this._datashare.userTypeMentor = true
         this._datashare.userTypeAdmin = false
+        this.getMentorNotifications()
+        
       }
       if (localStorage.getItem('role')=='1') {
         this._datashare.userTypeStudent = false
@@ -34,5 +37,21 @@ export class NavbarComponent implements OnInit {
       }
     }
   }
+
+  getMentorNotifications() {
+   let email = localStorage.getItem('email')
+   this._datashare.getMentorNotifications(email)
+      .subscribe(
+        res => {
+          this.mentorNotifications = res
+          if(this.mentorNotifications.length > 0) {
+            this._datashare.notiMentor = this.mentorNotifications.length
+          }
+        },
+        err => console.log(err)
+      )
+  }
+
+
 
 }

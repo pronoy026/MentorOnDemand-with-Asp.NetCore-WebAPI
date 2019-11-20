@@ -99,6 +99,28 @@ namespace DotNetMentorOnDemandAPI.Controllers
             return Ok(nots);
         }
 
+        [HttpGet("deletenotifications/{email}")]
+        public IActionResult DeleteNotifications(string email)
+        {
+            var result = repository.DeleteNotifications(email);
+            if (result)
+            {
+                return Ok();
+            }
+            return BadRequest();
+        }
+
+        [HttpGet("deletenotificationbyid/{id}")]
+        public IActionResult DeleteNotificationById(int id)
+        {
+            var result = repository.DeleteNotificationById(id);
+            if (result)
+            {
+                return Ok();
+            }
+            return BadRequest();
+        }
+
 
         [HttpPost("acceptcourse")]
         public IActionResult AcceptCourse([FromBody] Course course)

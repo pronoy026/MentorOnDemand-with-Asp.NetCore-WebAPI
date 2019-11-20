@@ -19,6 +19,9 @@ export class DatashareService {
   selectedCourseForPayment
   courseOverviewData
 
+  notiMentor
+  notiStudent
+
 
   private allMentorCoursesUrl = this.apiServer + "/api/admin/getallcourses"
   private _getAllStudentsUrl = this.apiServer + "/api/admin/getactiveusers/3"
@@ -173,14 +176,37 @@ export class DatashareService {
   }
 
   private _getMentorNotificationsUrl = this.apiServer + '/api/mentor/getnotifications/'
+  private _deleteMentorNotificationsUrl = this.apiServer + '/api/mentor/deletenotifications/'
+  private _deleteMentorNotificationByIdUrl = this.apiServer + '/api/mentor/deletenotificationbyid/'
+
+
   private _getStudentNotificationsUrl = this.apiServer + '/api/student/getnotifications/'
+  private _deleteStudentNotificationsUrl = this.apiServer + '/api/student/deletenotifications/'
+  private _deleteStudentNotificationByIdUrl = this.apiServer + '/api/student/deletenotificationbyid/'
 
   getMentorNotifications(email) {
     return this.http.get<any>(this._getMentorNotificationsUrl+email)
   }
 
+  deleteMentorNotifications(email) {
+    return this.http.get<any>(this._deleteMentorNotificationsUrl+email)
+  }
+
+  deleteMentorNotificationById(id) {
+    return this.http.get<any>(this._deleteMentorNotificationByIdUrl+id)
+  }
+
+
   getStudentNotifications(email) {
     return this.http.get<any>(this._getStudentNotificationsUrl+email)
+  }
+
+  deleteStudentNotifications(email) {
+    return this.http.get<any>(this._deleteStudentNotificationsUrl+email)
+  }
+
+  deleteStudentNotificationById(id) {
+    return this.http.get<any>(this._deleteStudentNotificationByIdUrl+id)
   }
 
 }

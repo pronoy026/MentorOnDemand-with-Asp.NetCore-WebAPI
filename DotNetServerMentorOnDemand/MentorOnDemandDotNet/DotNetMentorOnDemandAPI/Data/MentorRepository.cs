@@ -315,6 +315,7 @@ namespace DotNetMentorOnDemandAPI.Data
                            where (s.MentorEmail == email && n.StudentEmail == c.StudentEmail && n.IsMentor == true)
                            select new NotificationDto
                            {
+                               NotiId = n.Id,
                                CourseName = t.Name,
                                Fee = t.Fee,
                                Student = (
@@ -330,6 +331,28 @@ namespace DotNetMentorOnDemandAPI.Data
                            }
                 );
             return nots;
+        }
+
+        public bool DeleteNotifications(string email)
+        {
+            var notif = (from s in context.MentorSkills
+                         join t in context.Technologies on s.TechId equals t.Id
+                         join c in context.Courses on s.Id equals c.MentorSkillId
+                         join n in context.Notifications on s.Id equals n.MentorSkillId
+                         where (s.MentorEmail == email && n.StudentEmail == c.StudentEmail && n.IsMentor == true)
+                         select n);
+
+            context.Notifications.RemoveRange(notif);
+            context.SaveChanges();
+            return true;
+        }
+
+        public bool DeleteNotificationById(int id)
+        {
+            var notif = context.Notifications.Where(n => n.Id == id).FirstOrDefault();
+            context.Notifications.Remove(notif);
+            context.SaveChanges();
+            return true;
         }
     }
 }
