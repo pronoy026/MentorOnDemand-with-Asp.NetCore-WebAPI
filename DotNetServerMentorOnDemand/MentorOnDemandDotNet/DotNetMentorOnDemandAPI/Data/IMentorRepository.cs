@@ -25,5 +25,7 @@ namespace DotNetMentorOnDemandAPI.Data
         public bool DeleteNotifications(string email);
         public bool DeleteNotificationById(int id);
 
+        public IEnumerable<Payment> GetPaymentRecords(string email);
+
     }
 }

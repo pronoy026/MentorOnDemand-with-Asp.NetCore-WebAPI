@@ -13,6 +13,7 @@ export class NavbarComponent implements OnInit {
   userEmail
 
   mentorNotifications
+  studentNotifications
 
   constructor(public _datashare: DatashareService, private _authService: AuthService) { }
 
@@ -51,6 +52,20 @@ export class NavbarComponent implements OnInit {
         err => console.log(err)
       )
   }
+
+  getStudentNotifications() {
+    let email = localStorage.getItem('email')
+    this._datashare.getStudentNotifications(email)
+       .subscribe(
+         res => {
+           this.studentNotifications = res
+           if(this.studentNotifications.length > 0) {
+             this._datashare.notiMentor = this.studentNotifications.length
+           }
+         },
+         err => console.log(err)
+       )
+   }
 
 
 

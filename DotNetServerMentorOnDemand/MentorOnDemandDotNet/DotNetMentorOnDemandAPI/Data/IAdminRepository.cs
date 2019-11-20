@@ -12,7 +12,7 @@ namespace DotNetMentorOnDemandAPI.Data
         IEnumerable<UserDto> GetActiveUsersByRole(string roleId);
         IEnumerable<UserDto> GetBlockedUsersByRole(string roleId);
         IEnumerable<CourseDto> GetAllCourses();
-
+        IEnumerable<Payment> GetAllPayments();
         bool RegisterTechnology(Technology technology);
         bool BlockUnblockUser(string userId);
     }

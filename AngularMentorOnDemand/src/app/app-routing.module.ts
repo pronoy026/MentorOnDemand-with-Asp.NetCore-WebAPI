@@ -38,6 +38,8 @@ import { MentorconfirmedcoursesComponent } from './mentorconfirmedcourses/mentor
 import { StudentconfirmedcoursesComponent } from './studentconfirmedcourses/studentconfirmedcourses.component';
 import { StudentnotificationsComponent } from './studentnotifications/studentnotifications.component';
 import { MentornotificationsComponent } from './mentornotifications/mentornotifications.component';
+import { MentorpaymentComponent } from './mentorpayment/mentorpayment.component';
+import { AdminpaymentComponent } from './adminpayment/adminpayment.component';
 
 
 const routes: Routes = [
@@ -60,7 +62,8 @@ const routes: Routes = [
       { path: 'allmentors', component: AllmentorsComponent },
       { path: 'addtechnology', component: AddtechnologyComponent },
       { path: 'blockedstudents', component: BlockedstudentsComponent },
-      { path: 'blockedmentors', component: BlockedmentorsComponent }
+      { path: 'blockedmentors', component: BlockedmentorsComponent },
+      { path: 'adminpayment', component: AdminpaymentComponent}
     ],
     canActivate: [AuthGuard]
   },
@@ -91,6 +94,9 @@ const routes: Routes = [
       },
       {
         path: 'mentornotifications', component: MentornotificationsComponent
+      },
+      {
+        path: 'mentorpayment', component: MentorpaymentComponent
       }
     ],
     canActivate: [AuthGuard]

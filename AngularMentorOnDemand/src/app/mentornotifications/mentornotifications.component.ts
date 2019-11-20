@@ -10,27 +10,52 @@ import { DatashareService } from '../datashare.service';
 export class MentornotificationsComponent implements OnInit {
 
   notifications
-  tabletoggler : boolean
+  tabletoggler: boolean
 
-  constructor(private _notification : NotificationService, private data : DatashareService) { }
+  constructor(private _notification: NotificationService, public data: DatashareService) { }
 
   ngOnInit() {
+    this.getNotifications()
+  }
+
+  getNotifications() {
     let email = localStorage.getItem('email')
     this.data.getMentorNotifications(email)
-        .subscribe(
-          res => {
-            console.log(res)
-            this.notifications = res
-            if (this.notifications.length == 0) {
-              this.tabletoggler = false
-            } else {
-              this.tabletoggler = true
-            }
-          },
-          err => {
-            console.log(err)
+      .subscribe(
+        res => {
+          this.notifications = res
+          this.data.notiMentor = this.notifications.length
+          if (this.notifications.length == 0) {
+            this.tabletoggler = false
+          } else {
+            this.tabletoggler = true
           }
-        )
+        },
+        err => {
+          console.log(err)
+        }
+      )
+  }
+
+  markAllAsRead() {
+    let email = localStorage.getItem('email')
+    this.data.deleteMentorNotifications(email)
+      .subscribe(
+        res => {
+          this.getNotifications()
+        },
+        err => console.log(err)
+      )
+  }
+
+  markAsRead(notification) {
+    this.data.deleteMentorNotificationById(notification.notiId)
+      .subscribe(
+        res => {
+          this.getNotifications()
+        },
+        err => console.log(err)
+      )
   }
 
 }

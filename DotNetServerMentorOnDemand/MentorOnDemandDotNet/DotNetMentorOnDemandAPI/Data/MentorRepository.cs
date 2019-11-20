@@ -354,5 +354,11 @@ namespace DotNetMentorOnDemandAPI.Data
             context.SaveChanges();
             return true;
         }
+
+        public IEnumerable<Payment> GetPaymentRecords(string email)
+        {
+            var payments = context.Payments.Where(p => p.MentorEmail == email);
+            return payments;
+        }
     }
 }

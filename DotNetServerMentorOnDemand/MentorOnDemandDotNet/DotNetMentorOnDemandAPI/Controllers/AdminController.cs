@@ -47,7 +47,7 @@ namespace DotNetMentorOnDemandAPI.Controllers
         }
 
         [HttpGet("getallcourses")]
-        public IActionResult GetAllCourses(string id)
+        public IActionResult GetAllCourses()
         {
             var courses = repository.GetAllCourses();
             if (!courses.Any())
@@ -55,6 +55,13 @@ namespace DotNetMentorOnDemandAPI.Controllers
                 return BadRequest();
             }
             return Ok(courses);
+        }
+
+        [HttpGet("getallpayments")]
+        public IActionResult GetAllPayments()
+        {
+            var payments = repository.GetAllPayments();
+            return Ok(payments);
         }
 
         // POST: api/Admin

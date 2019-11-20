@@ -209,4 +209,15 @@ export class DatashareService {
     return this.http.get<any>(this._deleteStudentNotificationByIdUrl+id)
   }
 
+  
+  private _getAllAdminPaymentsUrl = this.apiServer + '/api/admin/getallpayments'
+  getAllAdminPayments() {
+    return this.http.get<any>(this._getAllAdminPaymentsUrl)
+  }
+
+  private _getAllmentorPaymentsUrl = this.apiServer + '/api/mentor/getpaymentrecords/'
+  getAllMentorPayments(email) {
+    return this.http.get<any>(this._getAllmentorPaymentsUrl+email)
+  }
+
 }

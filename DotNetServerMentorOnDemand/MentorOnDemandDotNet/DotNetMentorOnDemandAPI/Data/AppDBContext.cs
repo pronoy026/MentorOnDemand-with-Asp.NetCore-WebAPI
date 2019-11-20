@@ -48,5 +48,6 @@ namespace DotNetMentorOnDemandAPI.Data
         public DbSet<MentorSkill> MentorSkills { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<Notification> Notifications { get; set; }
+        public DbSet<Payment> Payments { get; set; }
     }
 }

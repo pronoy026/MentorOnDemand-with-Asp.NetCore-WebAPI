@@ -50,6 +50,8 @@ import { MentorconfirmedcoursesComponent } from './mentorconfirmedcourses/mentor
 import { MentornotificationsComponent } from './mentornotifications/mentornotifications.component';
 import { StudentnotificationsComponent } from './studentnotifications/studentnotifications.component';
 import { NotificationService } from './notification.service';
+import { MentorpaymentComponent } from './mentorpayment/mentorpayment.component';
+import { AdminpaymentComponent } from './adminpayment/adminpayment.component';
 
 @NgModule({
   declarations: [
@@ -93,6 +95,8 @@ import { NotificationService } from './notification.service';
     MentorconfirmedcoursesComponent,
     MentornotificationsComponent,
     StudentnotificationsComponent,
+    MentorpaymentComponent,
+    AdminpaymentComponent,
   ],
   imports: [
     BrowserModule,

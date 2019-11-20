@@ -83,6 +83,48 @@ namespace DotNetMentorOnDemandAPI.Data
                         CompletionStatus = course.CompletionStatus
                     };
                     context.Notifications.Add(noti);
+
+                    //Adding data to Payments table
+                    var mentorEmailQuery = (
+                        from s in context.MentorSkills
+                        join c in context.Courses on s.Id equals c.MentorSkillId
+                        where (c.MentorSkillId == course.MentorSkillId)
+                        select s).FirstOrDefault();
+
+                    var MentorEmail = mentorEmailQuery.MentorEmail;
+
+                    var mentorNameQuery = (from u in context.CustomUsers
+                                          where (MentorEmail == u.Email)
+                                          select u).FirstOrDefault();
+                    var MentorName = mentorNameQuery.Name;
+
+                    var studentNameQuery = (from u in context.CustomUsers
+                                           where (course.StudentEmail == u.Email)
+                                           select u).FirstOrDefault();
+                    var StudentName = studentNameQuery.Name;
+
+                    var payment = (
+                                    from s in context.MentorSkills
+                                    join t in context.Technologies on s.TechId equals t.Id
+                                    join c in context.Courses on s.Id equals c.MentorSkillId
+                                    where (s.Id == course.MentorSkillId && c.StudentEmail == course.StudentEmail)
+                                    select new Payment
+                                    {
+                                        Amount = t.Fee/4,
+                                        CourseName = t.Name,
+                                        TotalFee = t.Fee,
+                                        MentorEmail = s.MentorEmail,
+                                        StudentEmail = c.StudentEmail,
+                                        MentorName = MentorName,
+                                        StudentName = StudentName,
+                                        CompletionStatus = course.CompletionStatus 
+                                    }
+                        ).FirstOrDefault();
+                    context.Payments.Add(payment);
+                    context.SaveChanges();
+
+                    //////////
+
                 }
                 context.SaveChanges();
 
@@ -118,6 +160,45 @@ namespace DotNetMentorOnDemandAPI.Data
                 };
                 context.Notifications.Add(noti);
                 context.SaveChanges();
+
+                //Adding data to Payments table
+                var mentorEmailQuery = (
+                    from s in context.MentorSkills
+                    join c in context.Courses on s.Id equals c.MentorSkillId
+                    where (c.MentorSkillId == course.MentorSkillId)
+                    select s).FirstOrDefault();
+
+                var MentorEmail = mentorEmailQuery.MentorEmail;
+
+                var mentorNameQuery = (from u in context.CustomUsers
+                                       where (MentorEmail == u.Email)
+                                       select u).FirstOrDefault();
+                var MentorName = mentorNameQuery.Name;
+
+                var studentNameQuery = (from u in context.CustomUsers
+                                        where (course.StudentEmail == u.Email)
+                                        select u).FirstOrDefault();
+                var StudentName = studentNameQuery.Name;
+
+                var payment = (
+                                from s in context.MentorSkills
+                                join t in context.Technologies on s.TechId equals t.Id
+                                join c in context.Courses on s.Id equals c.MentorSkillId
+                                where (s.Id == course.MentorSkillId && c.StudentEmail == course.StudentEmail)
+                                select new Payment
+                                {
+                                    Amount = t.Fee / 4,
+                                    CourseName = t.Name,
+                                    TotalFee = t.Fee,
+                                    MentorEmail = s.MentorEmail,
+                                    StudentEmail = c.StudentEmail,
+                                    MentorName = MentorName,
+                                    StudentName = StudentName,
+                                    CompletionStatus = 100
+                                }
+                    ).FirstOrDefault();
+                context.Payments.Add(payment);
+                context.SaveChanges();
                 return true;
             }
             catch (Exception)
@@ -125,6 +206,28 @@ namespace DotNetMentorOnDemandAPI.Data
 
                 throw;
             }
+        }
+
+        public bool DeleteNotificationById(int id)
+        {
+            var notif = context.Notifications.Where(n => n.Id == id).FirstOrDefault();
+            context.Notifications.Remove(notif);
+            context.SaveChanges();
+            return true;
+        }
+
+        public bool DeleteNotifications(string email)
+        {
+            var notif = (from s in context.MentorSkills
+                         join t in context.Technologies on s.TechId equals t.Id
+                         join c in context.Courses on s.Id equals c.MentorSkillId
+                         join n in context.Notifications on s.Id equals n.MentorSkillId
+                         where (s.Id == n.MentorSkillId && n.StudentEmail == email && n.IsStudent == true)
+                         select n);
+
+            context.Notifications.RemoveRange(notif);
+            context.SaveChanges();
+            return true;
         }
 
         public IEnumerable<IndividualCourseDto> GetAppliedCourses(string StudentEmail)
@@ -222,6 +325,33 @@ namespace DotNetMentorOnDemandAPI.Data
                            }
                 );
             return courses;
+        }
+
+        public IEnumerable<NotificationDto> GetNotifications(string email)
+        {
+            var nots = (from s in context.MentorSkills
+                        join t in context.Technologies on s.TechId equals t.Id
+                        join c in context.Courses on s.Id equals c.MentorSkillId
+                        join n in context.Notifications on s.Id equals n.MentorSkillId
+                        where (s.Id == n.MentorSkillId && n.StudentEmail == email && c.StudentEmail == email && n.IsStudent == true)
+                        select new NotificationDto
+                        {
+                            NotiId = n.Id,
+                            CourseName = t.Name,
+                            Fee = t.Fee,
+                            Mentor = (
+                                    from u in context.CustomUsers
+                                    where (s.MentorEmail == u.Email)
+                                    select new UserDto
+                                    {
+                                        Email = u.Email,
+                                        Name = u.Name
+                                    }).FirstOrDefault(),
+                            Type = n.Type,
+                            CompletionStatus = n.CompletionStatus
+                        }
+                );
+            return nots;
         }
 
         public IEnumerable<IndividualCourseDto> GetRegisteredCourses(string StudentEmail)

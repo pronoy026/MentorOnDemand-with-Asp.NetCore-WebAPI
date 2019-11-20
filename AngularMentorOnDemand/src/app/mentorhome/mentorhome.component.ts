@@ -11,6 +11,8 @@ import { DatashareService } from '../datashare.service';
 })
 export class MentorhomeComponent implements OnInit {
 
+  mentorNotifications
+
   constructor(private _auth: AuthService, private _router: Router, public _datashare: DatashareService) { }
 
   ngOnInit() {
@@ -21,7 +23,20 @@ export class MentorhomeComponent implements OnInit {
         if (localStorage.getItem('role')!='2') {
           this._router.navigate(['/signin'])
         }
-
+        this.getMentorNotifications()
   }
+  getMentorNotifications() {
+    let email = localStorage.getItem('email')
+    this._datashare.getMentorNotifications(email)
+       .subscribe(
+         res => {
+           this.mentorNotifications = res
+           if(this.mentorNotifications.length > 0) {
+             this._datashare.notiMentor = this.mentorNotifications.length
+           }
+         },
+         err => console.log(err)
+       )
+   }
 
 }

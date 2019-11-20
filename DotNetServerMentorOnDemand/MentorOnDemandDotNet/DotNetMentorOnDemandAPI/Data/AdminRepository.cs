@@ -79,6 +79,12 @@ namespace DotNetMentorOnDemandAPI.Data
             return courses;
         }
 
+        public IEnumerable<Payment> GetAllPayments()
+        {
+            var payments = context.Payments;
+            return payments;
+        }
+
         public IEnumerable<UserDto> GetBlockedUsersByRole(string roleId)
         {
             var users = (from u in context.CustomUsers

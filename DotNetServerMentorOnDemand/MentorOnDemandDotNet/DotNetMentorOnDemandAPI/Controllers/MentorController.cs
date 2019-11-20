@@ -144,6 +144,14 @@ namespace DotNetMentorOnDemandAPI.Controllers
             return BadRequest();
         }
 
+        [HttpGet("getpaymentrecords/{email}")]
+        public IActionResult GetPaymentRecords(string email)
+        {
+            var payments = repository.GetPaymentRecords(email);
+            return Ok(payments);
+            
+        }
+
 
 
         // PUT: api/Mentor/5

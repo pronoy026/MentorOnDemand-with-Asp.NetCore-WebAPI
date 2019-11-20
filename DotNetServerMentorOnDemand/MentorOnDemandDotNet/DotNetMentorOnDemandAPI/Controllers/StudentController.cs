@@ -111,6 +111,35 @@ namespace DotNetMentorOnDemandAPI.Controllers
             return BadRequest();
         }
 
+        [HttpGet("getnotifications/{email}")]
+        public IActionResult GetNotifications(string email)
+        {
+            var nots = repository.GetNotifications(email);
+            return Ok(nots);
+        }
+
+        [HttpGet("deletenotifications/{email}")]
+        public IActionResult DeleteNotifications(string email)
+        {
+            var result = repository.DeleteNotifications(email);
+            if (result)
+            {
+                return Ok();
+            }
+            return BadRequest();
+        }
+
+        [HttpGet("deletenotificationbyid/{id}")]
+        public IActionResult DeleteNotificationById(int id)
+        {
+            var result = repository.DeleteNotificationById(id);
+            if (result)
+            {
+                return Ok();
+            }
+            return BadRequest();
+        }
+
         // PUT: api/Student/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
