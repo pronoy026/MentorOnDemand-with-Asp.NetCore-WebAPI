@@ -16,23 +16,17 @@ export class StudentcompletedcoursesComponent implements OnInit {
   constructor(public _datashare: DatashareService, private _auth: AuthService, private _router: Router) { }
 
   ngOnInit() {
-    this._auth.specialTokenRequest()
+    let StudentEmail = localStorage.getItem('email')
+    this._datashare.getStudentAllCompletedCourses(StudentEmail)
       .subscribe(
         res => {
-          let studentEmail = res.userEmail
-          this._datashare.getStudentAllCompletedCourses({ studentEmail })
-            .subscribe(
-              res => {
-                this.completedCourses = res
-                if (this.completedCourses.length == 0) {
-                  this.tabletoggler = false
-                } else {
-                  this.tabletoggler = true
-                }
-              },
-              err => console.log(err)
-            )
-
+          console.log(res)
+          this.completedCourses = res
+          if (this.completedCourses.length == 0) {
+            this.tabletoggler = false
+          } else {
+            this.tabletoggler = true
+          }
         },
         err => console.log(err)
       )

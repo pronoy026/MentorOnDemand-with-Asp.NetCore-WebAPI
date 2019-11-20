@@ -16,7 +16,7 @@ export class StudentappliedcoursesComponent implements OnInit {
 
   ngOnInit() {
     let StudentEmail = localStorage.getItem('email')
-    this._datashare.getStudentAllAppliedCourses({ StudentEmail })
+    this._datashare.getStudentAllAppliedCourses(StudentEmail)
       .subscribe(
         res => {
           console.log(res)

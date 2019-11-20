@@ -33,6 +33,11 @@ import { MentortechnologiesComponent } from './mentortechnologies/mentortechnolo
 import { MentorcreatecourseComponent } from './mentorcreatecourse/mentorcreatecourse.component';
 import { MentorcreatedcoursesComponent } from './mentorcreatedcourses/mentorcreatedcourses.component';
 import { MentorrejectedcoursesComponent } from './mentorrejectedcourses/mentorrejectedcourses.component';
+import { StudentrejectedcoursesComponent } from './studentrejectedcourses/studentrejectedcourses.component';
+import { MentorconfirmedcoursesComponent } from './mentorconfirmedcourses/mentorconfirmedcourses.component';
+import { StudentconfirmedcoursesComponent } from './studentconfirmedcourses/studentconfirmedcourses.component';
+import { StudentnotificationsComponent } from './studentnotifications/studentnotifications.component';
+import { MentornotificationsComponent } from './mentornotifications/mentornotifications.component';
 
 
 const routes: Routes = [
@@ -80,7 +85,13 @@ const routes: Routes = [
       },
       { path: 'mentortechnologies', component : MentortechnologiesComponent},
       { path: 'mentorcreatecourse', component: MentorcreatecourseComponent},
-      { path: 'mentorcreatedcourses', component: MentorcreatedcoursesComponent}
+      { path: 'mentorcreatedcourses', component: MentorcreatedcoursesComponent},
+      {
+        path: 'mentorconfirmedcourses', component: MentorconfirmedcoursesComponent
+      },
+      {
+        path: 'mentornotifications', component: MentornotificationsComponent
+      }
     ],
     canActivate: [AuthGuard]
   },
@@ -102,7 +113,16 @@ const routes: Routes = [
         path : 'studentcompletedcourses', component: StudentcompletedcoursesComponent
       },
       {
+        path : 'studentrejectedcourses', component: StudentrejectedcoursesComponent
+      },
+      {
+        path: 'studentconfirmedcourses', component: StudentconfirmedcoursesComponent
+      },
+      {
         path : 'courseoverview', component: CourseOverviewComponent
+      },
+      {
+        path: 'studentnotifications', component: StudentnotificationsComponent
       }
 
     ],

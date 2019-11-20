@@ -11,5 +11,7 @@ export class ContactusComponent implements OnInit {
 
   ngOnInit() {
   }
-
+action(){
+  alert("Thank you for providing your valuable feedback. We'll get back to you soon.")
+}
 }

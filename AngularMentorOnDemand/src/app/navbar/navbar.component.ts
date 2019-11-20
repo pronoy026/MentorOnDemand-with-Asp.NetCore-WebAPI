@@ -11,6 +11,7 @@ import { DatashareService } from '../datashare.service';
 })
 export class NavbarComponent implements OnInit {
   userEmail
+  noti=12
 
   constructor(public _datashare: DatashareService, private _authService: AuthService) { }
 

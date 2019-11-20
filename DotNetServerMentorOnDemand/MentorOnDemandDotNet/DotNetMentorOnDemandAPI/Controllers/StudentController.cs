@@ -24,7 +24,11 @@ namespace DotNetMentorOnDemandAPI.Controllers
         public IActionResult CheckCourse([FromBody] Course course)
         {
             var result = repository.CheckCourse(course);
-            return Ok(result);
+            if (result)
+            {
+                return Ok();
+            }
+            return BadRequest();
         }
 
         [HttpPost("applyforcourse")]
@@ -38,21 +42,73 @@ namespace DotNetMentorOnDemandAPI.Controllers
             return BadRequest();
         }
 
-        [HttpPost("getappliedcourses")]
-        public IActionResult GetAppliedCourses([FromBody] Course course)
+        [HttpGet("getappliedcourses/{email}")]
+        public IActionResult GetAppliedCourses(string email)
         {
-            var courses = repository.GetAppliedCourses(course);
-            if (!courses.Any())
-            {
-                return NoContent();
-            }
+            var courses = repository.GetAppliedCourses(email);
+            return Ok(courses);
+        }
+
+        [HttpGet("getrejectedcourses/{email}")]
+        public IActionResult GetRejectedCourses(string email)
+        {
+            var courses = repository.GetRejectedCourses(email);
+            return Ok(courses);
+        }
+
+        [HttpGet("getregisteredcourses/{email}")]
+        public IActionResult GetRegisteredCourses(string email)
+        {
+            var courses = repository.GetRegisteredCourses(email);
+            return Ok(courses);
+        }
+
+        [HttpGet("getcompletedcourses/{email}")]
+        public IActionResult GetCompletedCourses(string email)
+        {
+            var courses = repository.GetCompletedCourses(email);
+            return Ok(courses);
+        }
+
+        [HttpGet("getconfirmedcourses/{email}")]
+        public IActionResult GetConfirmedCourses(string email)
+        {
+            var courses = repository.GetConfirmedCourses(email);
             return Ok(courses);
         }
 
         // POST: api/Student
-        [HttpPost]
-        public void Post([FromBody] string value)
+        [HttpPost("coursecompletionstatusupdate")]
+        public IActionResult CourseCompletionStatusUpdate([FromBody] Course course)
         {
+            var result = repository.CourseCompletionStatusUpdate(course);
+            if (result)
+            {
+                return Ok();
+            }
+            return BadRequest();
+        }
+
+        [HttpPost("coursecompletionupdate")]
+        public IActionResult CourseCompletionUpdate([FromBody] Course course)
+        {
+            var result = repository.CourseCompletionUpdate(course);
+            if (result)
+            {
+                return Ok();
+            }
+            return BadRequest();
+        }
+
+        [HttpPost("registercourse")]
+        public IActionResult RegisterCourse([FromBody] Course course)
+        {
+            var result = repository.RegisterCourse(course);
+            if (result)
+            {
+                return Ok();
+            }
+            return BadRequest();
         }
 
         // PUT: api/Student/5

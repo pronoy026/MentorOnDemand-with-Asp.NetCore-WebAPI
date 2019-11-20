@@ -19,21 +19,42 @@ export class CourseOverviewComponent implements OnInit {
   }
   updateRegisteredCourse() {
     let value = parseInt(this.selectValue, 10)
-    if (value!= 100 && value!= undefined) {
-      this.course.completion = value
-      this._datashare.updateRegisteredCourses(this.course)
+    if(value<=this.course.completionStatus)
+    {
+      alert(`Please select completion percentage higher than ${this.course.completionStatus} %`)
+    }
+    if(this.selectValue===undefined) {
+      alert('Please select completion percentage to proceed!')
+    }
+    if (value>this.course.completionStatus && value!= 100 && this.selectValue!==undefined) {
+
+      let record = {
+        StudentEmail : localStorage.getItem('email'),
+        MentorSkillId : this.course.mentorSkillId,
+        CompletionStatus : value
+      }
+
+      this._datashare.courseCompletionStatusUpdate(record)
         .subscribe(
-          res => console.log('updated successfully'),
+          res => {
+            this.course.completionStatus = value
+            alert(`Course completion percentage updated successfully to ${this.course.completionStatus} %`)
+            this._router.navigate(['/studenthome/studentregisteredcourses'])
+          },
           err => console.log(err)
         )
     }
-    else{
+    if (value== 100 && this.selectValue!==undefined) {
       this.courseCompletion()
     }
   }
   courseCompletion() {
-    this.course.completion = 100
-    this._datashare.completedCourse(this.course)
+    let record = {
+      StudentEmail : localStorage.getItem('email'),
+      MentorSkillId : this.course.mentorSkillId,
+      CompletionStatus : 100
+    }
+    this._datashare.courseCompletionUpdate(record)
         .subscribe(
           res => this._router.navigate(['/studenthome/studentcompletedcourses']),
           err => console.log(err)

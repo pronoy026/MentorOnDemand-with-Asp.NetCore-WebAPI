@@ -20,5 +20,6 @@ namespace DotNetMentorOnDemandAPI.Models
         public bool IsRegistered { get; set; }
         public bool IsRejected { get; set; }
         public bool IsCompleted { get; set; }
+        public bool IsConfirmed { get; set; }
     }
 }

@@ -1,0 +1,28 @@
+<div class="container">
+    <div style="padding-top: 20px">
+        <h4 style="color: #00887a;text-align: center; font-family: fantasy">All Rejected Courses</h4>
+        <table *ngIf="tabletoggler" class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>No</th>
+                    <th>Type</th>
+                    <th>Course name</th>
+                    <th>student</th>
+                    <th>Fee</th>
+                    <th>Completion Status</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let noti of notifications; let i = index" class="shadow">
+                <tr>
+                    <td>{{i+1}}</td>
+                    <td>{{noti.type}}</td>
+                    <td *ngIf="noti.type=='request'">{{noti.courseName}}</td>
+                    <td>{{noti.student.name}}</td>
+                    <td>{{noti.fee}}</td>
+                    <td>{{noti.completionStatus}} %</td>
+                </tr>
+            </tbody>
+        </table>
+        <div *ngIf="!tabletoggler" style="text-align: center; color:#0066ff;padding-top:100px ;"> There are no notifications!</div>
+    </div>
+</div>

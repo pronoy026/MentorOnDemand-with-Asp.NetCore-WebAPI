@@ -44,6 +44,12 @@ import { MentortechnologiesComponent } from './mentortechnologies/mentortechnolo
 import { MentorcreatedcoursesComponent } from './mentorcreatedcourses/mentorcreatedcourses.component';
 import { MentorcreatecourseComponent } from './mentorcreatecourse/mentorcreatecourse.component';
 import { MentorrejectedcoursesComponent } from './mentorrejectedcourses/mentorrejectedcourses.component';
+import { StudentrejectedcoursesComponent } from './studentrejectedcourses/studentrejectedcourses.component';
+import { StudentconfirmedcoursesComponent } from './studentconfirmedcourses/studentconfirmedcourses.component';
+import { MentorconfirmedcoursesComponent } from './mentorconfirmedcourses/mentorconfirmedcourses.component';
+import { MentornotificationsComponent } from './mentornotifications/mentornotifications.component';
+import { StudentnotificationsComponent } from './studentnotifications/studentnotifications.component';
+import { NotificationService } from './notification.service';
 
 @NgModule({
   declarations: [
@@ -82,6 +88,11 @@ import { MentorrejectedcoursesComponent } from './mentorrejectedcourses/mentorre
     MentorcreatedcoursesComponent,
     MentorcreatecourseComponent,
     MentorrejectedcoursesComponent,
+    StudentrejectedcoursesComponent,
+    StudentconfirmedcoursesComponent,
+    MentorconfirmedcoursesComponent,
+    MentornotificationsComponent,
+    StudentnotificationsComponent,
   ],
   imports: [
     BrowserModule,
@@ -89,7 +100,7 @@ import { MentorrejectedcoursesComponent } from './mentorrejectedcourses/mentorre
     FormsModule,
     HttpClientModule
   ],
-  providers: [AuthService, AuthGuard, DatashareService, BlockService,
+  providers: [AuthService, AuthGuard, DatashareService, BlockService, NotificationService,
   { provide : HTTP_INTERCEPTORS, useClass : TokenInterceptorService, multi : true }],
   bootstrap: [AppComponent]
 })

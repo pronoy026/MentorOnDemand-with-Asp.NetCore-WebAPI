@@ -48,7 +48,7 @@
 
             <!-- for student  -->
             <li class="nav-item">
-                <a class="nav-link" *ngIf='_authService.loggedIn() && _datashare.userTypeStudent' style="color:#00887a; cursor: pointer;" routerLink='/studenthome'>Welcome! {{_datashare.userEmail}}</a>
+                <a class="nav-link" *ngIf='_authService.loggedIn() && _datashare.userTypeStudent' style="color:#00887a; cursor: pointer;" routerLink='/studenthome'>{{_datashare.userEmail}}</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" *ngIf='_authService.loggedIn() && _datashare.userTypeStudent' style="color:#fff; cursor: pointer;" routerLink='/studenthome'>Dashboard</a>
@@ -56,7 +56,7 @@
 
             <!-- for mentor  -->
             <li class="nav-item">
-                <a class="nav-link" *ngIf='_authService.loggedIn() && _datashare.userTypeMentor' style="color:#00887a; cursor: pointer;" routerLink='/mentorhome'>Welcome! {{_datashare.userEmail}}</a>
+                <a class="nav-link" *ngIf='_authService.loggedIn() && _datashare.userTypeMentor' style="color:#00887a; cursor: pointer;" routerLink='/mentorhome'>{{_datashare.userEmail}}</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" *ngIf='_authService.loggedIn() && _datashare.userTypeMentor' style="color:#fff; cursor: pointer;" routerLink='/mentorhome'>Dashboard</a>
@@ -64,7 +64,7 @@
 
             <!-- for admin  -->
             <li class="nav-item">
-                <a class="nav-link" *ngIf='_authService.loggedIn() && _datashare.userTypeAdmin' style="color:#00887a; cursor: pointer;" routerLink='/adminhome'>Welcome! {{_datashare.userEmail}}</a>
+                <a class="nav-link" *ngIf='_authService.loggedIn() && _datashare.userTypeAdmin' style="color:#00887a; cursor: pointer;" routerLink='/adminhome'>{{_datashare.userEmail}}</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" *ngIf='_authService.loggedIn() && _datashare.userTypeAdmin' style="color:#fff; cursor: pointer;" routerLink='/adminhome'>Dashboard</a>
@@ -77,6 +77,12 @@
             <li class="nav-item">
                 <a class="nav-link" routerLink="/search">
                     <i class="fa fa-search fa-lg" style="color: #0066ff"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="notification">
+                    <span><i class="fa fa-bell" style="color:#00887a" aria-hidden="true"></i></span>
+                    <span class="badge">{{noti}}</span>
                 </a>
             </li>
         </ul>

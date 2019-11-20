@@ -16,23 +16,17 @@ export class StudentregisteredcoursesComponent implements OnInit {
   constructor(public _datashare: DatashareService, private _auth: AuthService, private _router : Router) { }
 
   ngOnInit() {
-    this._auth.specialTokenRequest()
+    let StudentEmail = localStorage.getItem('email')
+    this._datashare.getStudentAllRegisteredCourses(StudentEmail)
       .subscribe(
         res => {
-          let studentEmail = res.userEmail
-          this._datashare.getStudentAllRegisteredCourses({ studentEmail })
-            .subscribe(
-              res => {
-                this.registeredCourses = res
-                if (this.registeredCourses.length == 0) {
-                  this.tabletoggler = false
-                } else {
-                  this.tabletoggler = true
-                }
-              },
-              err => console.log(err)
-            )
-
+          console.log(res)
+          this.registeredCourses = res
+          if (this.registeredCourses.length == 0) {
+            this.tabletoggler = false
+          } else {
+            this.tabletoggler = true
+          }
         },
         err => console.log(err)
       )

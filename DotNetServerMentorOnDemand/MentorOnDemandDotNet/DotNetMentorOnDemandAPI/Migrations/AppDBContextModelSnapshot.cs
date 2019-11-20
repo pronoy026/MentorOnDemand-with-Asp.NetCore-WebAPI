@@ -32,6 +32,9 @@ namespace DotNetMentorOnDemandAPI.Migrations
                     b.Property<bool>("IsCompleted")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsConfirmed")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsRegistered")
                         .HasColumnType("bit");
 
@@ -79,6 +82,36 @@ namespace DotNetMentorOnDemandAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("MentorSkills");
+                });
+
+            modelBuilder.Entity("DotNetMentorOnDemandAPI.Models.Notification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CompletionStatus")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsMentor")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsStudent")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("MentorSkillId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("StudentEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Notifications");
                 });
 
             modelBuilder.Entity("DotNetMentorOnDemandAPI.Models.Technology", b =>
@@ -150,21 +183,21 @@ namespace DotNetMentorOnDemandAPI.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "257371f6-a1a7-46df-b126-52b18a09ca40",
+                            ConcurrencyStamp = "4945f9f0-e3f4-47e0-9c99-a5af4fdeac43",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
                             Id = "2",
-                            ConcurrencyStamp = "33462e4d-64f6-4cf2-a357-54a4db0fb090",
+                            ConcurrencyStamp = "cc908083-b8cb-4581-8a30-a8a68f770ec3",
                             Name = "Mentor",
                             NormalizedName = "Mentor"
                         },
                         new
                         {
                             Id = "3",
-                            ConcurrencyStamp = "c825b34d-2640-4dd5-a290-a8c532980d76",
+                            ConcurrencyStamp = "a4e9609e-96a8-4235-bdb2-f7de8f2a4fd6",
                             Name = "Student",
                             NormalizedName = "Student"
                         });
@@ -365,6 +398,9 @@ namespace DotNetMentorOnDemandAPI.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
 
                     b.HasDiscriminator().HasValue("UserModel");
                 });

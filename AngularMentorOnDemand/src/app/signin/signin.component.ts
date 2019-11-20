@@ -44,7 +44,7 @@ export class SigninComponent implements OnInit {
             }
           },
           err => {
-            this.message = "Oops! Login failed. Please enter correct email and password."
+            this.message = err.error
           }
         )
   }

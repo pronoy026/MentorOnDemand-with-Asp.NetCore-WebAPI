@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DotNetMentorOnDemandAPI.Data;
+using DotNetMentorOnDemandAPI.DTOs;
 using DotNetMentorOnDemandAPI.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -82,6 +83,20 @@ namespace DotNetMentorOnDemandAPI.Controllers
         {
             var courses = repository.GetRejectedCourses(email);
             return Ok(courses);
+        }
+
+        [HttpGet("getconfirmedcourses/{email}")]
+        public IActionResult GetConfirmedCourses(string email)
+        {
+            var courses = repository.GetConfirmedCourses(email);
+            return Ok(courses);
+        }
+
+        [HttpGet("getnotifications/{email}")]
+        public IActionResult GetNotifications(string email)
+        {
+            var nots = repository.GetNotifications(email);
+            return Ok(nots);
         }
 
 

@@ -14,7 +14,6 @@ export class StudentpaymentComponent implements OnInit {
   courseData
   paymentSuccess: boolean
   notStudent: boolean
-  eligibleStudent: boolean
 
   constructor(private _router: Router, private _datashare: DatashareService, private _auth: AuthService) { }
 
@@ -23,52 +22,30 @@ export class StudentpaymentComponent implements OnInit {
     this.paymentSuccess = false
     
           this._datashare.userEmail = localStorage.getItem('email')
-          // this._datashare.userTypeStudent = true
-          // this._datashare.userTypeMentor = false
-          // this._datashare.userTypeAdmin = false
           if (localStorage.getItem('role')!='3') {
             this.notStudent = true
           } else {
             this.notStudent = false
-            if (this.courseData !== undefined) {
-              console.log(this.courseData)
-              let StudentEmail = localStorage.getItem('email')
-              let MentorSkillId = this.courseData.mentorSkillId
-              this._datashare.checkCourse({StudentEmail, MentorSkillId})
-                .subscribe(
-                  res => {
-                    this.eligibleStudent = res
-                    console.log(this.eligibleStudent)
-                  },
-                  err => console.log(err)
-                )
-            }
           }
-
   }
 
-  appliedCourse(course) {
+  registerCourse(course) {
     console.log('data came')
     console.log(course)
     let record = {
       StudentEmail : localStorage.getItem('email'),
-      MentorSkillId : course.mentorSkillId,
-      IsRequested : true,
-      IsCompleted: false,
-      IsRejected: false,
-      IsRegistered: false,
-      CompletionStatus: 0,
-      Rating : 0
+      MentorSkillId : course.mentorSkillId
     }
     console.log(record)
-    this._datashare.appliedCourse(record)
+    this._datashare.studentRegisterCourse(record)
       .subscribe(
         res => { 
           this.paymentSuccess = true
-          console.log('course applied successfully')
+          console.log('course registered successfully')
         },
         err => console.log(err)
       )
+    
   }
 
 }

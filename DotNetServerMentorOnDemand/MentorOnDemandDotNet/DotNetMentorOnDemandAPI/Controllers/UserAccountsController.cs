@@ -50,6 +50,10 @@ namespace DotNetMentorOnDemandAPI.Controllers
             {
                 //sending response if succeeded
                 var appUser = userManager.Users.Single(r => r.Email == model.Email);
+                if (appUser.IsBlocked)
+                {
+                    return Unauthorized("Sorry! your account is blocked!");
+                }
                 var token = await GenerateJwtToken(model.Email, appUser);
                 var response = new TokenResponseDto
                 {
@@ -59,7 +63,7 @@ namespace DotNetMentorOnDemandAPI.Controllers
                 };
                 return Ok(response);
             }
-            return BadRequest(result);
+            return BadRequest("Oops! Login failed. Please enter correct email and password.");
         }
 
         [Route("logout")]
