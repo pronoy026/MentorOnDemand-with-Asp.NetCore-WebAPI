@@ -3,7 +3,7 @@
         <h4 style="color: #00887a;text-align: center; font-family: fantasy">Payment Records</h4>
         <div *ngIf="tabletoggler">
             <div *ngFor="let payment of payments; let i = index">
-                <div style="margin-top: 20px;">
+                <div *ngIf="payment.type=='debit'" style="margin-top: 20px;">
                     <div class="card shadow" style="padding: 17px;">
                         <div class="row">
                             <div class="col-md-2" style="font-family: fantasy;
@@ -14,6 +14,7 @@
                                 <div style="text-align: center;">
                                     Description : Student {{payment.studentName}} completed {{payment.completionStatus}}% of {{payment.courseName}} course of Total fee rs. {{payment.totalFee}}
                                 </div>
+                                <div style="color: #0066ff; font-family: fantasy;text-align: center;">Commission Deducted : {{payment.courseCommision}}% of total fee.</div>
                             </div>
                         </div>
                     </div>

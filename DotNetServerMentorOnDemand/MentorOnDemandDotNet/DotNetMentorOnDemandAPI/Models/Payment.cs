@@ -18,5 +18,7 @@ namespace DotNetMentorOnDemandAPI.Models
         public string StudentName { get; set; }
         public string StudentEmail { get; set; }
         public int CompletionStatus { get; set; }
+        public int CourseCommision { get; set; }
+        public string Type { get; set; }
     }
 }

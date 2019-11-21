@@ -13,7 +13,7 @@ namespace DotNetMentorOnDemandAPI.DTOs
         public bool IsBlocked { get; set; }
         public string PhoneNumber { get; set; }
         public string Role { get; set; }
-        public int Rating { get; set; }
+        public int Rating { get; set; } = 5;
         public int Experience { get; set; }
     }
 }

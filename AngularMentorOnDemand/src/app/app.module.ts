@@ -26,7 +26,6 @@ import { MentorhomeComponent } from './mentorhome/mentorhome.component';
 import { StudentappliedcoursesComponent } from './studentappliedcourses/studentappliedcourses.component';
 import { StudentregisteredcoursesComponent } from './studentregisteredcourses/studentregisteredcourses.component';
 import { AllstudentsComponent } from './allstudents/allstudents.component';
-import { AllcoursesComponent } from './allcourses/allcourses.component';
 import { AllmentorsComponent } from './allmentors/allmentors.component';
 import { BlockService } from './block.service';
 import { BlockedstudentsComponent } from './blockedstudents/blockedstudents.component';
@@ -41,7 +40,6 @@ import { MentorcompletedcoursesComponent } from './mentorcompletedcourses/mentor
 import { CourseOverviewComponent } from './course-overview/course-overview.component';
 import { AddtechnologyComponent } from './addtechnology/addtechnology.component';
 import { MentortechnologiesComponent } from './mentortechnologies/mentortechnologies.component';
-import { MentorcreatedcoursesComponent } from './mentorcreatedcourses/mentorcreatedcourses.component';
 import { MentorcreatecourseComponent } from './mentorcreatecourse/mentorcreatecourse.component';
 import { MentorrejectedcoursesComponent } from './mentorrejectedcourses/mentorrejectedcourses.component';
 import { StudentrejectedcoursesComponent } from './studentrejectedcourses/studentrejectedcourses.component';
@@ -77,7 +75,6 @@ import { AdminedittechComponent } from './adminedittech/adminedittech.component'
     StudentappliedcoursesComponent,
     StudentregisteredcoursesComponent,
     AllstudentsComponent,
-    AllcoursesComponent,
     AllmentorsComponent,
     BlockedstudentsComponent,
     BlockedmentorsComponent,
@@ -91,7 +88,6 @@ import { AdminedittechComponent } from './adminedittech/adminedittech.component'
     CourseOverviewComponent,
     AddtechnologyComponent,
     MentortechnologiesComponent,
-    MentorcreatedcoursesComponent,
     MentorcreatecourseComponent,
     MentorrejectedcoursesComponent,
     StudentrejectedcoursesComponent,

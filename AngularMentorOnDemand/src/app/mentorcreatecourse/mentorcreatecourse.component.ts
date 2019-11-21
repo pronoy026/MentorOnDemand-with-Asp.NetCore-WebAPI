@@ -38,7 +38,8 @@ export class MentorcreatecourseComponent implements OnInit {
     this.data.createMentorCourse(this.createCourseData)
       .subscribe(
         res => {
-          this.router.navigate(['/mentorhome/mentorcreatedcourses'])
+          alert(`The ${this.techData.name} course has been created successfully. Kindly view courses to find.`)
+          this.router.navigate(['/courses'])
         },
         err => console.log(err)
       )

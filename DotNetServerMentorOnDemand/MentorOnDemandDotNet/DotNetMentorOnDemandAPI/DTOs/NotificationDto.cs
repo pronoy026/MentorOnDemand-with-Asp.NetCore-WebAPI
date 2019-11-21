@@ -13,6 +13,7 @@ namespace DotNetMentorOnDemandAPI.DTOs
         public UserDto Mentor { get; set; }
         public UserDto Student { get; set; }
         public string Type { get; set; }
+        public int Commission { get; set; }
         public int CompletionStatus { get; set; }
     }
 }

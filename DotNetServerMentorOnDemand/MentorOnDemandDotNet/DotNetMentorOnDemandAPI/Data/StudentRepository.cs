@@ -110,14 +110,16 @@ namespace DotNetMentorOnDemandAPI.Data
                                     where (s.Id == course.MentorSkillId && c.StudentEmail == course.StudentEmail)
                                     select new Payment
                                     {
-                                        Amount = t.Fee/4,
+                                        Amount = (t.Fee-t.Fee*t.Commission/100)/4,
                                         CourseName = t.Name,
                                         TotalFee = t.Fee,
                                         MentorEmail = s.MentorEmail,
                                         StudentEmail = c.StudentEmail,
                                         MentorName = MentorName,
                                         StudentName = StudentName,
-                                        CompletionStatus = course.CompletionStatus 
+                                        CompletionStatus = course.CompletionStatus,
+                                        CourseCommision = t.Commission,
+                                        Type = "debit"
                                     }
                         ).FirstOrDefault();
                     context.Payments.Add(payment);
@@ -349,7 +351,8 @@ namespace DotNetMentorOnDemandAPI.Data
                                         Name = u.Name
                                     }).FirstOrDefault(),
                             Type = n.Type,
-                            CompletionStatus = n.CompletionStatus
+                            CompletionStatus = n.CompletionStatus,
+                            Commission = t.Commission
                         }
                 );
             return nots;
@@ -440,6 +443,49 @@ namespace DotNetMentorOnDemandAPI.Data
             };
             context.Notifications.Add(noti);
             context.SaveChanges();
+
+            //Adding data to Payments table
+            var mentorEmailQuery = (
+                from s in context.MentorSkills
+                join c in context.Courses on s.Id equals c.MentorSkillId
+                where (c.MentorSkillId == course.MentorSkillId)
+                select s).FirstOrDefault();
+
+            var MentorEmail = mentorEmailQuery.MentorEmail;
+
+            var mentorNameQuery = (from u in context.CustomUsers
+                                   where (MentorEmail == u.Email)
+                                   select u).FirstOrDefault();
+            var MentorName = mentorNameQuery.Name;
+
+            var studentNameQuery = (from u in context.CustomUsers
+                                    where (course.StudentEmail == u.Email)
+                                    select u).FirstOrDefault();
+            var StudentName = studentNameQuery.Name;
+
+            var payment = (
+                            from s in context.MentorSkills
+                            join t in context.Technologies on s.TechId equals t.Id
+                            join c in context.Courses on s.Id equals c.MentorSkillId
+                            where (s.Id == course.MentorSkillId && c.StudentEmail == course.StudentEmail)
+                            select new Payment
+                            {
+                                Amount = t.Fee,
+                                CourseName = t.Name,
+                                TotalFee = t.Fee,
+                                MentorEmail = s.MentorEmail,
+                                StudentEmail = c.StudentEmail,
+                                MentorName = MentorName,
+                                StudentName = StudentName,
+                                CompletionStatus = 0,
+                                CourseCommision = t.Commission,
+                                Type = "credit"
+                            }
+                ).FirstOrDefault();
+            context.Payments.Add(payment);
+            context.SaveChanges();
+
+            //////////
 
             if (result > 0)
             {

@@ -7,7 +7,6 @@
                     <th>No</th>
                     <th>Name</th>
                     <th>Email</th>
-                    <th>Technology</th>
                     <th>Phone No</th>
                     <th>Action</th>
                 </tr>
@@ -17,8 +16,7 @@
                     <td>{{i+1}}</td>
                     <td>{{mentor.name}}</td>
                     <td>{{mentor.email}}</td>
-                    <td>{{mentor.technology}}</td>
-                    <td>{{mentor.phone}}</td>
+                    <td>{{mentor.phoneNumber}}</td>
                     <td><button class="btn btn-outline-success" (click)="unblockMentor(mentor)">Unblock</button>&nbsp;&nbsp;
                         <button class="btn btn-outline-primary" data-toggle="modal" data-target="#myModal" (click)="modalDataChange(mentor)">See Profile</button></td>
 
@@ -39,13 +37,6 @@
                                     <div>Email : {{mentorEmail}}</div>
                                     <div>Phone : {{mentorPhone}}</div>
                                     <div>Experience : {{mentorExpYears}} years</div>
-                                    <div>Start Date : {{mentorStartDate}}</div>
-                                    <div>End Date : {{mentorEndDate}}</div>
-                                    <div>Technology : {{mentorTechnology}}</div>
-                                    <div>Course Fee : {{courseFee}} /-</div>
-                                    <div>Commision takes: {{mentorCommision}} /-</div>
-                                    <div>No of Trainings Completed : {{noofTrainings}}</div>
-                                    <div>LinkedIn Profile : <a href="{{linkedin}}" target="blank">{{linkedin}}</a></div>
                                 </div>
 
                             </div>

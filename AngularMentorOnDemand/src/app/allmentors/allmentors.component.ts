@@ -17,13 +17,6 @@ export class AllmentorsComponent implements OnInit {
   mentorEmail
   mentorPhone
   mentorExpYears
-  mentorStartDate
-  mentorEndDate
-  mentorTechnology
-  courseFee
-  mentorCommision
-  noofTrainings
-  linkedin
 
   constructor(private _datashare: DatashareService, private _block: BlockService, private _router: Router) { }
 
@@ -32,6 +25,7 @@ export class AllmentorsComponent implements OnInit {
     this._datashare.getAllMentors()
       .subscribe(
         res => {
+          console.log(res)
           this.mentorList = res
           if (this.mentorList.length == 0) {
             this.tabletoggler = false
@@ -45,17 +39,11 @@ export class AllmentorsComponent implements OnInit {
   }
 
   modalDataChange(data) {
+    console.log(data)
     this.mentorName = data.name
     this.mentorEmail = data.email
-    this.mentorPhone = data.phone
+    this.mentorPhone = data.phoneNumber
     this.mentorExpYears = data.experience
-    this.mentorStartDate = data.startdate
-    this.mentorEndDate = data.enddate
-    this.mentorTechnology = data.technology
-    this.courseFee = data.fees
-    this.mentorCommision = data.commision
-    this.noofTrainings = data.nooftrainings
-    this.linkedin = data.linkedin
   }
 
   blockMentor(mentor) {

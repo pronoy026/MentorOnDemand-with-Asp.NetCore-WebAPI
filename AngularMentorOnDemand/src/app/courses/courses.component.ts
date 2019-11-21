@@ -13,7 +13,6 @@ export class CoursesComponent implements OnInit {
 
   mentorName
   mentorRating
-  mentorNoOfTrainings
   expYears
 
 
@@ -38,8 +37,7 @@ export class CoursesComponent implements OnInit {
   modalDataChange(data) {
 
     this.mentorName = data.mentor.name
-    this.mentorRating = data.rating
-    this.mentorNoOfTrainings = data.nooftrainings
+    this.mentorRating = data.mentor.rating
     this.expYears = data.mentor.experience
   }
   buttonAction(course) {

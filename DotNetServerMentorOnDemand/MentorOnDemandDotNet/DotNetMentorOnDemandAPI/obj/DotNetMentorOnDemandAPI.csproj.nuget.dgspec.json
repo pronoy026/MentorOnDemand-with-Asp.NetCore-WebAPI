@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Hp\\Desktop\\Mentor1DemandDotNet\\DotNetServerMentorOnDemand\\MentorOnDemandDotNet\\DotNetMentorOnDemandAPI\\DotNetMentorOnDemandAPI.csproj": {}
+    "F:\\MentorOnDemand-with-Asp.NetCore-WebAPI\\DotNetServerMentorOnDemand\\MentorOnDemandDotNet\\DotNetMentorOnDemandAPI\\DotNetMentorOnDemandAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Hp\\Desktop\\Mentor1DemandDotNet\\DotNetServerMentorOnDemand\\MentorOnDemandDotNet\\DotNetMentorOnDemandAPI\\DotNetMentorOnDemandAPI.csproj": {
+    "F:\\MentorOnDemand-with-Asp.NetCore-WebAPI\\DotNetServerMentorOnDemand\\MentorOnDemandDotNet\\DotNetMentorOnDemandAPI\\DotNetMentorOnDemandAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Hp\\Desktop\\Mentor1DemandDotNet\\DotNetServerMentorOnDemand\\MentorOnDemandDotNet\\DotNetMentorOnDemandAPI\\DotNetMentorOnDemandAPI.csproj",
+        "projectUniqueName": "F:\\MentorOnDemand-with-Asp.NetCore-WebAPI\\DotNetServerMentorOnDemand\\MentorOnDemandDotNet\\DotNetMentorOnDemandAPI\\DotNetMentorOnDemandAPI.csproj",
         "projectName": "DotNetMentorOnDemandAPI",
-        "projectPath": "C:\\Users\\Hp\\Desktop\\Mentor1DemandDotNet\\DotNetServerMentorOnDemand\\MentorOnDemandDotNet\\DotNetMentorOnDemandAPI\\DotNetMentorOnDemandAPI.csproj",
-        "packagesPath": "C:\\Users\\Hp\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Hp\\Desktop\\Mentor1DemandDotNet\\DotNetServerMentorOnDemand\\MentorOnDemandDotNet\\DotNetMentorOnDemandAPI\\obj\\",
+        "projectPath": "F:\\MentorOnDemand-with-Asp.NetCore-WebAPI\\DotNetServerMentorOnDemand\\MentorOnDemandDotNet\\DotNetMentorOnDemandAPI\\DotNetMentorOnDemandAPI.csproj",
+        "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
+        "outputPath": "F:\\MentorOnDemand-with-Asp.NetCore-WebAPI\\DotNetServerMentorOnDemand\\MentorOnDemandDotNet\\DotNetMentorOnDemandAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Hp\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

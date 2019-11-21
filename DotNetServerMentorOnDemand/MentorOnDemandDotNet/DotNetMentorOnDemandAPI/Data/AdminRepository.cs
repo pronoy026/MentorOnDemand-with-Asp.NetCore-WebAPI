@@ -44,6 +44,7 @@ namespace DotNetMentorOnDemandAPI.Data
                              Name = u.Name,
                              Role = r.RoleId,
                              IsBlocked = u.IsBlocked,
+                             Experience = u.Experience,
                              PhoneNumber = u.PhoneNumber
                          });
             return users.ToList();
@@ -54,6 +55,7 @@ namespace DotNetMentorOnDemandAPI.Data
             var courses = (from s in context.MentorSkills
                            join t in context.Technologies on s.TechId equals t.Id
                            join c in context.Courses on s.Id equals c.MentorSkillId
+                           where(c.IsRegistered == true)
                            select new IndividualCourseDto
                            {
                                Name = t.Name,
@@ -61,6 +63,7 @@ namespace DotNetMentorOnDemandAPI.Data
                                Fee = t.Fee,
                                ImageUrl = t.ImageUrl,
                                Duration = t.Duration,
+                               CompletionStatus = c.CompletionStatus,
                                MentorSkillId = s.Id,
                                Mentor = (
                                        from u in context.CustomUsers
@@ -98,6 +101,7 @@ namespace DotNetMentorOnDemandAPI.Data
                                Fee = t.Fee,
                                ImageUrl = t.ImageUrl,
                                Duration = t.Duration,
+                               Commission = t.Commission,
                                MentorSkillId = s.Id,
                                Mentor= (
                                        from u in context.CustomUsers
@@ -108,8 +112,8 @@ namespace DotNetMentorOnDemandAPI.Data
                                            Email = u.Email,
                                            Name = u.Name,
                                            Role = "Mentor",
-                                           IsBlocked = u.IsBlocked,
-                                           PhoneNumber = u.PhoneNumber
+                                           Rating = u.Rating,
+                                           Experience = u.Experience
                                        }).FirstOrDefault(),
                                StartDate = s.StartDate.ToLongDateString(),
                                EndDate = s.EndDate.ToLongDateString()
@@ -136,6 +140,8 @@ namespace DotNetMentorOnDemandAPI.Data
                              Name = u.Name,
                              Role = r.RoleId,
                              IsBlocked = u.IsBlocked,
+                             Rating = u.Rating,
+                             Experience = u.Experience,
                              PhoneNumber = u.PhoneNumber
                          });
             return users.ToList();

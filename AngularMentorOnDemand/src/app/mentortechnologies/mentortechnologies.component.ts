@@ -39,7 +39,7 @@ export class MentortechnologiesComponent implements OnInit {
           this.router.navigate(['/mentorhome/mentorcreatecourse'])
         },
         err => {
-          alert(err.error)
+          alert('The course is already created in this technology. kindly wait for the course to end and try creating course later on this technology.')
           console.log(err.error)
         }
       )

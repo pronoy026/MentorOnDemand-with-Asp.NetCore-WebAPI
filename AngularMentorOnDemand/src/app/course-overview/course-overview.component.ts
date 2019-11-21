@@ -19,6 +19,14 @@ export class CourseOverviewComponent implements OnInit {
   }
   updateRegisteredCourse() {
     let value = parseInt(this.selectValue, 10)
+
+    //
+    if((this.course.completionStatus+25)!=value)
+    {
+      alert(`Please complete the course step by step! Please complete ${this.course.completionStatus+25}% of the course first.`)
+    }
+    //
+
     if(value<=this.course.completionStatus)
     {
       alert(`Please select completion percentage higher than ${this.course.completionStatus} %`)
@@ -26,7 +34,7 @@ export class CourseOverviewComponent implements OnInit {
     if(this.selectValue===undefined) {
       alert('Please select completion percentage to proceed!')
     }
-    if (value>this.course.completionStatus && value!= 100 && this.selectValue!==undefined) {
+    if ((this.course.completionStatus+25)==value && value>this.course.completionStatus && value!= 100 && this.selectValue!==undefined) {
 
       let record = {
         StudentEmail : localStorage.getItem('email'),
@@ -45,9 +53,20 @@ export class CourseOverviewComponent implements OnInit {
         )
     }
     if (value== 100 && this.selectValue!==undefined) {
+      this.completionCheck()
+    }
+  }
+  completionCheck() {
+    if (this.course.completionStatus+25!= 100) {
+      {
+        alert(`Before completing make sure that you have completed the course upto 75%`)
+      }
+    }
+    else {
       this.courseCompletion()
     }
   }
+
   courseCompletion() {
     let record = {
       StudentEmail : localStorage.getItem('email'),

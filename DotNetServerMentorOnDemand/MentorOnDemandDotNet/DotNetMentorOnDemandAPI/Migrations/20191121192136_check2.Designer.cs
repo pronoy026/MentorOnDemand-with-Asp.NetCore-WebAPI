@@ -4,14 +4,16 @@ using DotNetMentorOnDemandAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DotNetMentorOnDemandAPI.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    partial class AppDBContextModelSnapshot : ModelSnapshot
+    [Migration("20191121192136_check2")]
+    partial class check2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -228,21 +230,21 @@ namespace DotNetMentorOnDemandAPI.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "7fc9d252-2d13-4e9c-9781-ad14dc84bd05",
+                            ConcurrencyStamp = "8a8ece1c-d0c2-4011-969e-5f4b4331d1fa",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
                             Id = "2",
-                            ConcurrencyStamp = "5d585c12-304b-4ec5-a4d7-56e1804b0524",
+                            ConcurrencyStamp = "5de5b156-be6c-4849-8e5d-5334b0e6f7be",
                             Name = "Mentor",
                             NormalizedName = "Mentor"
                         },
                         new
                         {
                             Id = "3",
-                            ConcurrencyStamp = "dd38d49b-ae4e-470f-a8a9-35eb470f781b",
+                            ConcurrencyStamp = "7c55c044-e82a-4c31-9783-33c51cbf8513",
                             Name = "Student",
                             NormalizedName = "Student"
                         });

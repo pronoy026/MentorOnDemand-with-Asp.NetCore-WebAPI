@@ -16,7 +16,6 @@ import { MentorhomeComponent } from './mentorhome/mentorhome.component';
 import { StudentappliedcoursesComponent } from './studentappliedcourses/studentappliedcourses.component';
 import { StudentregisteredcoursesComponent } from './studentregisteredcourses/studentregisteredcourses.component';
 import { AllstudentsComponent } from './allstudents/allstudents.component';
-import { AllcoursesComponent } from './allcourses/allcourses.component';
 import { AllmentorsComponent } from './allmentors/allmentors.component';
 import { BlockedstudentsComponent } from './blockedstudents/blockedstudents.component';
 import { BlockedmentorsComponent } from './blockedmentors/blockedmentors.component';
@@ -31,7 +30,6 @@ import { CourseOverviewComponent } from './course-overview/course-overview.compo
 import { AddtechnologyComponent } from './addtechnology/addtechnology.component';
 import { MentortechnologiesComponent } from './mentortechnologies/mentortechnologies.component';
 import { MentorcreatecourseComponent } from './mentorcreatecourse/mentorcreatecourse.component';
-import { MentorcreatedcoursesComponent } from './mentorcreatedcourses/mentorcreatedcourses.component';
 import { MentorrejectedcoursesComponent } from './mentorrejectedcourses/mentorrejectedcourses.component';
 import { StudentrejectedcoursesComponent } from './studentrejectedcourses/studentrejectedcourses.component';
 import { MentorconfirmedcoursesComponent } from './mentorconfirmedcourses/mentorconfirmedcourses.component';
@@ -62,7 +60,6 @@ const routes: Routes = [
     component: AdminhomeComponent,
     children: [
       { path: 'allstudents', component: AllstudentsComponent },
-      { path: 'allcourses', component: AllcoursesComponent },
       { path: 'allmentors', component: AllmentorsComponent },
       { path: 'addtechnology', component: AddtechnologyComponent },
       { path: 'blockedstudents', component: BlockedstudentsComponent },
@@ -104,7 +101,6 @@ const routes: Routes = [
       },
       { path: 'mentortechnologies', component : MentortechnologiesComponent},
       { path: 'mentorcreatecourse', component: MentorcreatecourseComponent},
-      { path: 'mentorcreatedcourses', component: MentorcreatedcoursesComponent},
       {
         path: 'mentorconfirmedcourses', component: MentorconfirmedcoursesComponent
       },
