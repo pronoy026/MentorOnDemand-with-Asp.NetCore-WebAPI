@@ -4,14 +4,16 @@ using DotNetMentorOnDemandAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DotNetMentorOnDemandAPI.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    partial class AppDBContextModelSnapshot : ModelSnapshot
+    [Migration("20191121100549_Twelth")]
+    partial class Twelth
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,9 +30,6 @@ namespace DotNetMentorOnDemandAPI.Migrations
 
                     b.Property<int>("CompletionStatus")
                         .HasColumnType("int");
-
-                    b.Property<bool>("IsBlocked")
-                        .HasColumnType("bit");
 
                     b.Property<bool>("IsCompleted")
                         .HasColumnType("bit");
@@ -222,21 +221,21 @@ namespace DotNetMentorOnDemandAPI.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "4bef024c-490c-4e07-873e-bfa2d8be1e83",
+                            ConcurrencyStamp = "ceb7f268-870c-4aca-9060-6d75dd4e441e",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
                             Id = "2",
-                            ConcurrencyStamp = "9e2e3d26-abf0-4a6c-9545-177510de353d",
+                            ConcurrencyStamp = "413295cf-b482-4890-b680-6f39c8865940",
                             Name = "Mentor",
                             NormalizedName = "Mentor"
                         },
                         new
                         {
                             Id = "3",
-                            ConcurrencyStamp = "c293e500-e3ab-4c7c-a8f3-00177b34cce3",
+                            ConcurrencyStamp = "e5259088-89f3-4edc-9a14-f051b3fbf5bb",
                             Name = "Student",
                             NormalizedName = "Student"
                         });

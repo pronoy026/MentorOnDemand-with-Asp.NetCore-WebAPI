@@ -60,7 +60,7 @@ export class NavbarComponent implements OnInit {
          res => {
            this.studentNotifications = res
            if(this.studentNotifications.length > 0) {
-             this._datashare.notiMentor = this.studentNotifications.length
+             this._datashare.notiStudent = this.studentNotifications.length
            }
          },
          err => console.log(err)

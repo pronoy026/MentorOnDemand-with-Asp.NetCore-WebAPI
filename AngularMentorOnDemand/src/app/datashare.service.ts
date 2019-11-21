@@ -16,7 +16,10 @@ export class DatashareService {
   accType: string
   userName: string
   techData: any
+
   selectedCourseForPayment
+  selectedTechnologyforEdit
+
   courseOverviewData
 
   notiMentor
@@ -55,7 +58,7 @@ export class DatashareService {
   private _registeredCourseUrl = "http://localhost:3000/api/registeredcourse"
 
   private _checkCourseUrl = this.apiServer + "/api/student/checkcourse"
-  private _searchUrl = "http://localhost:3000/api/search"
+  private _searchUrl = this.apiServer + "/api/admin/getsearchdata/"
 
   constructor(private http: HttpClient) { }
 
@@ -172,7 +175,7 @@ export class DatashareService {
   }
 
   search(data) {
-    return this.http.post<any>(this._searchUrl, data)
+    return this.http.get<any>(this._searchUrl+data)
   }
 
   private _getMentorNotificationsUrl = this.apiServer + '/api/mentor/getnotifications/'
@@ -218,6 +221,26 @@ export class DatashareService {
   private _getAllmentorPaymentsUrl = this.apiServer + '/api/mentor/getpaymentrecords/'
   getAllMentorPayments(email) {
     return this.http.get<any>(this._getAllmentorPaymentsUrl+email)
+  }
+
+  private rateCourseUrl = this.apiServer + '/api/student/ratecourse'
+  rateCourse(course) {
+    return this.http.post<any>(this.rateCourseUrl, course)
+  }
+
+  private _getAdminTecnologiesUrl = this.apiServer + '/api/admin/getalltechs'
+  getAdminTechnologies() {
+    return this.http.get<any>(this._getAdminTecnologiesUrl)
+  }
+
+  private _updateTecnologyUrl = this.apiServer + '/api/admin/updatetech'
+  updateAdminTech(tech) {
+    return this.http.post<any>(this._updateTecnologyUrl, tech)
+  }
+
+  private _getAdminIndividualCoursesUrl = this.apiServer + '/api/admin/getindividualcourses'
+  getAdminIndividualCourses() {
+    return this.http.get<any>(this._getAdminIndividualCoursesUrl)
   }
 
 }

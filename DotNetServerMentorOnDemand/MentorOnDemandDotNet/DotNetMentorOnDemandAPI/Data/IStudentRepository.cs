@@ -25,5 +25,6 @@ namespace DotNetMentorOnDemandAPI.Data
 
         public bool DeleteNotifications(string email);
         public bool DeleteNotificationById(int id);
+        public bool UpdateCourseRating(Course course);
     }
 }

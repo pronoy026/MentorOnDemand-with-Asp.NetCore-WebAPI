@@ -40,6 +40,10 @@ import { StudentnotificationsComponent } from './studentnotifications/studentnot
 import { MentornotificationsComponent } from './mentornotifications/mentornotifications.component';
 import { MentorpaymentComponent } from './mentorpayment/mentorpayment.component';
 import { AdminpaymentComponent } from './adminpayment/adminpayment.component';
+import { AdminlistoftechsComponent } from './adminlistoftechs/adminlistoftechs.component';
+import { AdminmentorcoursesComponent } from './adminmentorcourses/adminmentorcourses.component';
+import { AdminindividualcoursesComponent } from './adminindividualcourses/adminindividualcourses.component';
+import { AdminedittechComponent } from './adminedittech/adminedittech.component';
 
 
 const routes: Routes = [
@@ -63,7 +67,19 @@ const routes: Routes = [
       { path: 'addtechnology', component: AddtechnologyComponent },
       { path: 'blockedstudents', component: BlockedstudentsComponent },
       { path: 'blockedmentors', component: BlockedmentorsComponent },
-      { path: 'adminpayment', component: AdminpaymentComponent}
+      { path: 'adminpayment', component: AdminpaymentComponent},
+      {
+        path: 'adminlistoftechs', component: AdminlistoftechsComponent
+      },
+      {
+        path: 'adminmentorcourses', component: AdminmentorcoursesComponent
+      },
+      {
+        path: 'adminindividualcourses', component: AdminindividualcoursesComponent
+      },
+      {
+        path: 'adminedittech', component: AdminedittechComponent
+      }
     ],
     canActivate: [AuthGuard]
   },

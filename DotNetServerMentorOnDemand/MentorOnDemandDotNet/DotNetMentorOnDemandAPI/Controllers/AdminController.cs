@@ -50,10 +50,13 @@ namespace DotNetMentorOnDemandAPI.Controllers
         public IActionResult GetAllCourses()
         {
             var courses = repository.GetAllCourses();
-            if (!courses.Any())
-            {
-                return BadRequest();
-            }
+            return Ok(courses);
+        }
+
+        [HttpGet("getsearchdata/{searchString}")]
+        public IActionResult GetSearchData(string searchString)
+        {
+            var courses = repository.GetSearchData(searchString);
             return Ok(courses);
         }
 
@@ -62,6 +65,35 @@ namespace DotNetMentorOnDemandAPI.Controllers
         {
             var payments = repository.GetAllPayments();
             return Ok(payments);
+        }
+
+        //get all techs
+        [HttpGet("getalltechs")]
+        public IActionResult GetAllTechs()
+        {
+            var techs = repository.GetTechnologies();
+            return Ok(techs);
+        }
+
+        //get indivdual courses containing user - mentor data
+
+        [HttpGet("getindividualcourses")]
+        public IActionResult GetIndividualCourses()
+        {
+            var courses = repository.GetAdminDashIndividualCourses();
+            return Ok(courses);
+        }
+
+        //update tech
+        [HttpPost("updatetech")]
+        public IActionResult UpdateTech([FromBody] Technology technology)
+        {
+            var result = repository.UpdateTechnology(technology);
+            if (result)
+            {
+                return Ok();
+            }
+            return BadRequest();
         }
 
         // POST: api/Admin
@@ -75,18 +107,6 @@ namespace DotNetMentorOnDemandAPI.Controllers
             }
             return BadRequest();
         }
-
-        // PUT: api/Admin/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE: api/Admin/5
-        [HttpDelete("coursedelete/{id}")]
-        public void Delete(int id)
-        {
-
-        }
+        
     }
 }

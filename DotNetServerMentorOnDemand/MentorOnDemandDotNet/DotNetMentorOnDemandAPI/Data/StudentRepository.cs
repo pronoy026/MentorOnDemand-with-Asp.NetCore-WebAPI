@@ -143,6 +143,7 @@ namespace DotNetMentorOnDemandAPI.Data
             {
                 var findCourse = context.Courses.Where(c => c.StudentEmail == course.StudentEmail && c.MentorSkillId == course.MentorSkillId).FirstOrDefault();
                 findCourse.CompletionStatus = course.CompletionStatus;
+                findCourse.Rating = -1;
                 findCourse.IsCompleted = true;
                 findCourse.IsRegistered = false;
                 findCourse.IsRejected = false;
@@ -442,6 +443,35 @@ namespace DotNetMentorOnDemandAPI.Data
 
             if (result > 0)
             {
+                return true;
+            }
+            return false;
+        }
+
+        public bool UpdateCourseRating(Course course)
+        {
+            var findCourse = context.Courses.Where(c => c.MentorSkillId == course.MentorSkillId && c.StudentEmail == course.StudentEmail).FirstOrDefault();
+            findCourse.Rating = course.Rating;
+            var result = context.SaveChanges();
+            if (result>0)
+            {
+                //Mentor rating update
+                var avgRating = (int) context.Courses.Where(c => c.IsCompleted == true && c.MentorSkillId == course.MentorSkillId && c.StudentEmail == course.StudentEmail).Select(x => x.Rating).Average();
+
+                var mentorEmailQuery = (
+                    from s in context.MentorSkills
+                    join c in context.Courses on s.Id equals c.MentorSkillId
+                    where (c.MentorSkillId == course.MentorSkillId)
+                    select s).FirstOrDefault();
+
+                var MentorEmail = mentorEmailQuery.MentorEmail;
+
+                var userMentor = (from u in context.CustomUsers
+                                       where (MentorEmail == u.Email)
+                                       select u).FirstOrDefault();
+                userMentor.Rating = avgRating;
+                context.SaveChanges();
+
                 return true;
             }
             return false;

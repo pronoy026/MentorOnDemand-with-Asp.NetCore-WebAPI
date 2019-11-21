@@ -21,5 +21,6 @@ namespace DotNetMentorOnDemandAPI.Models
         public bool IsRejected { get; set; }
         public bool IsCompleted { get; set; }
         public bool IsConfirmed { get; set; }
+        public bool IsBlocked { get; set; }
     }
 }

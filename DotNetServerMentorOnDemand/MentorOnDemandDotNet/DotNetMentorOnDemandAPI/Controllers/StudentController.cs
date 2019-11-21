@@ -42,6 +42,17 @@ namespace DotNetMentorOnDemandAPI.Controllers
             return BadRequest();
         }
 
+        [HttpPost("ratecourse")]
+        public IActionResult RateCourse([FromBody] Course course)
+        {
+            var result = repository.UpdateCourseRating(course);
+            if (result)
+            {
+                return Ok();
+            }
+            return BadRequest();
+        }
+
         [HttpGet("getappliedcourses/{email}")]
         public IActionResult GetAppliedCourses(string email)
         {

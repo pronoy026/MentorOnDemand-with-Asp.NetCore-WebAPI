@@ -15,5 +15,12 @@ namespace DotNetMentorOnDemandAPI.Data
         IEnumerable<Payment> GetAllPayments();
         bool RegisterTechnology(Technology technology);
         bool BlockUnblockUser(string userId);
+
+        IEnumerable<CourseDto> GetSearchData(string searchString);
+        IEnumerable<Technology> GetTechnologies();
+        bool UpdateTechnology(Technology technology);
+        IEnumerable<IndividualCourseDto> GetAdminDashIndividualCourses();
+
+
     }
 }

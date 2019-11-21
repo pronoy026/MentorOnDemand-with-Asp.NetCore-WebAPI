@@ -52,6 +52,10 @@ import { StudentnotificationsComponent } from './studentnotifications/studentnot
 import { NotificationService } from './notification.service';
 import { MentorpaymentComponent } from './mentorpayment/mentorpayment.component';
 import { AdminpaymentComponent } from './adminpayment/adminpayment.component';
+import { AdminlistoftechsComponent } from './adminlistoftechs/adminlistoftechs.component';
+import { AdminmentorcoursesComponent } from './adminmentorcourses/adminmentorcourses.component';
+import { AdminindividualcoursesComponent } from './adminindividualcourses/adminindividualcourses.component';
+import { AdminedittechComponent } from './adminedittech/adminedittech.component';
 
 @NgModule({
   declarations: [
@@ -97,6 +101,10 @@ import { AdminpaymentComponent } from './adminpayment/adminpayment.component';
     StudentnotificationsComponent,
     MentorpaymentComponent,
     AdminpaymentComponent,
+    AdminlistoftechsComponent,
+    AdminmentorcoursesComponent,
+    AdminindividualcoursesComponent,
+    AdminedittechComponent,
   ],
   imports: [
     BrowserModule,

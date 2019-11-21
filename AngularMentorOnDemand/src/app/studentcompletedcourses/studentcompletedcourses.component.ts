@@ -12,10 +12,31 @@ export class StudentcompletedcoursesComponent implements OnInit {
 
   completedCourses
   tabletoggler: boolean
+  rate
 
   constructor(public _datashare: DatashareService, private _auth: AuthService, private _router: Router) { }
 
   ngOnInit() {
+    this.getCompletedCourses()
+  }
+
+  submitRating(course) {
+    let record = {
+      StudentEmail : localStorage.getItem('email'),
+      MentorSkillId : course.mentorSkillId,
+      Rating : this.rate
+    }
+console.log(record)
+    this._datashare.rateCourse(record)
+        .subscribe(
+          res => {
+            this.getCompletedCourses()
+          },
+          err => console.log(err)
+        )
+  }
+
+  getCompletedCourses() {
     let StudentEmail = localStorage.getItem('email')
     this._datashare.getStudentAllCompletedCourses(StudentEmail)
       .subscribe(

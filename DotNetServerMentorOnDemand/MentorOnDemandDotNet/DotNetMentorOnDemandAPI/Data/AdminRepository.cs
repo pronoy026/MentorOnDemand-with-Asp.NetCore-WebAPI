@@ -15,6 +15,7 @@ namespace DotNetMentorOnDemandAPI.Data
             this.context = context;
         }
 
+
         public bool BlockUnblockUser(string userId)
         {
             try
@@ -46,6 +47,44 @@ namespace DotNetMentorOnDemandAPI.Data
                              PhoneNumber = u.PhoneNumber
                          });
             return users.ToList();
+        }
+
+        public IEnumerable<IndividualCourseDto> GetAdminDashIndividualCourses()
+        {
+            var courses = (from s in context.MentorSkills
+                           join t in context.Technologies on s.TechId equals t.Id
+                           join c in context.Courses on s.Id equals c.MentorSkillId
+                           select new IndividualCourseDto
+                           {
+                               Name = t.Name,
+                               Description = t.Description,
+                               Fee = t.Fee,
+                               ImageUrl = t.ImageUrl,
+                               Duration = t.Duration,
+                               MentorSkillId = s.Id,
+                               Mentor = (
+                                       from u in context.CustomUsers
+                                       where (s.MentorEmail == u.Email)
+                                       select new UserDto
+                                       {
+                                           Email = u.Email,
+                                           Name = u.Name,
+                                           Role = "Mentor"
+                                       }).FirstOrDefault(),
+                               Student =(
+                                       from u in context.CustomUsers
+                                       where (c.StudentEmail == u.Email)
+                                       select new UserDto
+                                       {
+                                           Email = u.Email,
+                                           Name = u.Name,
+                                           Role = "Mentor"
+                                       }).FirstOrDefault(),
+                               StartDate = s.StartDate.ToLongDateString(),
+                               EndDate = s.EndDate.ToLongDateString()
+                           }
+    );
+            return courses;
         }
 
         public IEnumerable<CourseDto> GetAllCourses()
@@ -102,6 +141,44 @@ namespace DotNetMentorOnDemandAPI.Data
             return users.ToList();
         }
 
+        public IEnumerable<CourseDto> GetSearchData(string searchString)
+        {
+            var courses = (from s in context.MentorSkills
+                           join t in context.Technologies on s.TechId equals t.Id
+                           where(t.Name.Contains(searchString))
+                           select new CourseDto
+                           {
+                               Name = t.Name,
+                               Description = t.Description,
+                               Fee = t.Fee,
+                               ImageUrl = t.ImageUrl,
+                               Duration = t.Duration,
+                               MentorSkillId = s.Id,
+                               Mentor = (
+                                       from u in context.CustomUsers
+                                       where (s.MentorEmail == u.Email)
+                                       select new UserDto
+                                       {
+                                           Id = u.Id,
+                                           Email = u.Email,
+                                           Name = u.Name,
+                                           Role = "Mentor",
+                                           Rating = u.Rating,
+                                           Experience = u.Experience
+                                       }).FirstOrDefault(),
+                               StartDate = s.StartDate.ToLongDateString(),
+                               EndDate = s.EndDate.ToLongDateString()
+                           }
+               );
+            return courses;
+        }
+
+        public IEnumerable<Technology> GetTechnologies()
+        {
+            var techs = context.Technologies;
+            return techs;
+        }
+
         public bool RegisterTechnology(Technology technology)
         {
             try
@@ -116,6 +193,17 @@ namespace DotNetMentorOnDemandAPI.Data
 
                 throw;
             }
+        }
+
+        public bool UpdateTechnology(Technology technology)
+        {
+            context.Technologies.Update(technology);
+            var result = context.SaveChanges();
+            if (result > 0)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

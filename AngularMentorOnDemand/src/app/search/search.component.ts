@@ -9,12 +9,6 @@ import { Router } from '@angular/router';
 })
 export class SearchComponent implements OnInit {
 
-  public techs = ['Java', 'C++', 'Python', 'Javascript', 'Android', 'Full Stack Development'
-    , 'AngularJS', 'ReactJS', '.Net', 'Ruby', 'Ios', 'Machine Learning',
-    'Deep Learning', 'Cloud Technology', 'IOT', 'DevOps', 'Business Management']
-
-  public durations = ['1 week', '2 weeks', '3 weeks', '1 month', '2 month','3 months','6 months', '1 year']
-
   mentorCourseList
   mentorName
   mentorRating
@@ -36,9 +30,10 @@ export class SearchComponent implements OnInit {
   getSearchData() {
     let searchString = this.searchText
     console.log(searchString)
-    this._dataService.search({searchString})
+    this._dataService.search(searchString)
         .subscribe(
           res => {
+            console.log(res)
             this.mentorCourseList= res
             if(res.length==0) {
               this.searchmsg ='Sorry! no search result found.'
@@ -53,18 +48,51 @@ export class SearchComponent implements OnInit {
   }
 
   modalDataChange(data) {
-
-    this.mentorName =data.mentorName
-    this.mentorRating =data.rating
-    this.mentorNoOfTrainings= data.nooftrainings
-    this.expYears =data.expYears
+    console.log(data)
+    this.mentorName =data.mentor.name
+    this.mentorRating =data.mentor.rating
+    this.expYears =data.mentor.experience
 
   }
 
-  makePayment(course) {
-    console.log(course)
-    this._dataService.selectedCourseForPayment = course
-    this._router.navigate(['/studentpayment'])
+  buttonAction(course) {
+    if (localStorage.getItem('role') != '3') {
+      alert('Sorry! you are not eligible to apply for courses')
+    }
+    else {
+      this.applyCourse(course)
+    }
+  }
+
+  applyCourse(course) {
+    let StudentEmail = localStorage.getItem('email')
+    let MentorSkillId = course.mentorSkillId
+    this._dataService.checkCourse({ StudentEmail, MentorSkillId })
+      .subscribe(
+        res => {
+          let record = {
+            StudentEmail: localStorage.getItem('email'),
+            MentorSkillId: course.mentorSkillId,
+            IsRequested: true,
+            IsCompleted: false,
+            IsRejected: false,
+            IsRegistered: false,
+            IsConfirmed: false,
+            CompletionStatus: 0,
+            Rating: 0
+          }
+          console.log(record)
+          this._dataService.appliedCourse(record)
+            .subscribe(
+              res => {
+                alert(`Successfully applied for ${course.name} course by ${course.mentor.name}`)
+                this._router.navigate(['/studenthome/studentappliedcourses'])
+              },
+              err => console.log(err)
+            )
+        },
+        err => alert('Sorry! you are not eligible to enroll for this course. You have either applied for the course, yet to pay after getting confirmation, registered for the course or completed the course.')
+      )
   }
 
 }
